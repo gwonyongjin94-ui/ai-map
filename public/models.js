@@ -32,10 +32,11 @@
   // ───────── Data ─────────
   const modelKey = (m) => `${m.company}|${m.name}`;
 
-  // A month-only date sits mid-month on the chart.
+  // A month-only date counts as the 1st, so it never claims to be newer than a dated release
+  // of the same month (the same order modelsOf() in app.js gives by comparing the strings).
   function toTime(date) {
     const [y, m, d] = date.split('-').map(Number);
-    return Date.UTC(y, m - 1, d || 15);
+    return Date.UTC(y, m - 1, d || 1);
   }
 
   function fmtShort(date) {
@@ -52,7 +53,7 @@
     models = (window.AI_MODELS || [])
       .filter((m) => A.byId.has(m.company) && KINDS[m.kind])
       .map((m) => ({ ...m, key: modelKey(m), t: toTime(m.date), c: A.byId.get(m.company) }))
-      .sort((a, b) => b.t - a.t || a.name.localeCompare(b.name));
+      .sort((a, b) => b.t - a.t || b.date.length - a.date.length || a.name.localeCompare(b.name));
   }
 
   function matchesQuery(m) {
