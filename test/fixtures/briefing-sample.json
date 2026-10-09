@@ -1,0 +1,566 @@
+{
+  "generatedAt": 1790666534613,
+  "model": "sample (hand-written from real headlines)",
+  "windowHours": 72,
+  "articleCount": 242,
+  "usage": null,
+  "stories": [
+    {
+      "id": "6f572e264b",
+      "title": "AMD, \"AI 대모\" 페이페이 리의 월드랩스 82억 달러에 인수",
+      "summary": "AMD가 페이페이 리가 세운 3차원 공간지능 스타트업 월드랩스를 82억 달러(약 11조원)에 인수한다. 외신은 이번 인수를 \"피지컬 AI\"에 대한 베팅으로 평가했고, 페이페이 리는 AMD에 합류한다.",
+      "topic": "투자·M&A",
+      "importance": "major",
+      "companyIds": [
+        "amd"
+      ],
+      "latestAt": 1790660400000,
+      "articles": [
+        {
+          "title": "AMD, 페이페이 리 ‘월드랩스’ 인수...엔비디아처럼 ‘AI 제국’ 야심",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQSlJxWjBmQ3A0UW9VRVd6SXVCMzMyc0NlVmN0WWxteVRtMlA0c3NWNHVxN05pc0xKY2U3YXIwU1dMYmJTXzRaMDhQLXhycVBCTXVDaHVrZmExblBJckIyNUVfQ0MyZkxaSl9nNlVYakh2S2Y4UHlESnpQVmFNMHppLVNRRQ?oc=5",
+          "source": "조선일보",
+          "sourceUrl": "https://www.chosun.com",
+          "publishedAt": 1790660400000,
+          "lang": "ko"
+        },
+        {
+          "title": "AMD, AI 3차원 공간지능 스타트업 월드랩스 82억달러에 인수",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1TSzNxXzJtRHRBcEIwZmFBRW9XRTJnMjNwTXpJNnpIWEJJQWNFUjYta2Yxc0NKZEhGMHdOemdnX0JSRHBHS2VMY0hfdlZJZk1ObC1VSG9NeTc3dw?oc=5",
+          "source": "한국경제",
+          "sourceUrl": "https://www.hankyung.com",
+          "publishedAt": 1790655706000,
+          "lang": "ko"
+        },
+        {
+          "title": "AMD, 'AI 대모' 설립한 월드랩스 82억 달러 인수…\"AI 모델 통찰력 확보\"",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBONGRxLTN1X29zblpLX0hFX0Y5c1B6MGlqajJqQkVOQTMzbFg3aEtoV3EzT1NCRjcwQl9GY3FvRzAtNEtmS3lmemhpelpXVXBFeE5aMmRINUo2ZnpCb2ZnQWk0U2w2bm1Id1EyVWplYU1sRlI1NFRjRdIBeEFVX3lxTFBONGRxLTN1X29zblpLX0hFX0Y5c1B6MGlqajJqQkVOQTMzbFg3aEtoV3EzT1NCRjcwQl9GY3FvRzAtNEtmS3lmemhpelpXVXBFeE5aMmRINUo2ZnpCb2ZnQWk0U2w2bm1Id1EyVWplYU1sRlI1NFRjRQ?oc=5",
+          "source": "뉴시스",
+          "sourceUrl": "https://mobile.newsis.com",
+          "publishedAt": 1790643442000,
+          "lang": "ko"
+        },
+        {
+          "title": "AMD makes a big bet on the next era of AI with World Labs acquisition",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdGtZZnU0ekpWZTN0c2tuMTVUbmpPZEdVMUZjRHFtTXl6c1c5Qi16eVVzV2JLUlBYOF9wVWxrTnZ5MlV0NUM1bmFSc0FsRWZITl9LZ0NWUjdsb291UmxNYmNhUF95M0dMYkZWMmdKR2d5Rlo3UDV6ODhwRmliLW51TWV4eC14d3lXRFhEUA?oc=5",
+          "source": "MarketWatch",
+          "sourceUrl": "https://www.marketwatch.com",
+          "publishedAt": 1790640180000,
+          "lang": "en"
+        },
+        {
+          "title": "AMD to buy Fei-Fei Li's World Labs in $8.2 billion bet on 'physical AI'",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOUEpLOGExLXd6b0dKeXJadmdubW9zdWZzTDB6eVhLb0RSN3RSQTYyenBJdTVRdmR6Vm5jRnp4VHVQQ1NEbGFQb1J0V08xcThIRUs1aG5NQ0piLXhEQTRhcXZQNEZkMUVuaHVyLTRNVjhjbDEtZmxuTGpuR2d1ZDU2b1pGdkxqS1o2TUNDcUMyaFUzRVdmUUpPQndkdEZMZw?oc=5",
+          "source": "Reuters",
+          "sourceUrl": "https://www.reuters.com",
+          "publishedAt": 1790637516000,
+          "lang": "en"
+        },
+        {
+          "title": "AMD, 'AI 대모' 페이페이 리 월드랩스 11조원에 인수",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBzSTYxLUpoZERSeDBfRDA4cDdsNmV6cHI4MDBaQlJQZkU1VE5yY285eXgzZmc4eFVtbDFKbUtKSElPNVlpRWtnMm56OWFNclQ3ZUVhWklRX09MZXBoWGFSM9IBYEFVX3lxTFBzSTYxLUpoZERSeDBfRDA4cDdsNmV6cHI4MDBaQlJQZkU1VE5yY285eXgzZmc4eFVtbDFKbUtKSElPNVlpRWtnMm56OWFNclQ3ZUVhWklRX09MZXBoWGFSMw?oc=5",
+          "source": "연합뉴스",
+          "sourceUrl": "https://www.yna.co.kr",
+          "publishedAt": 1790633591000,
+          "lang": "ko"
+        },
+        {
+          "title": "AMD to Acquire World Labs for $8.2 Billion",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQLVpVcHpJVVFBektEcldpS0ttVXk1a2dkR0kzZEtUNmp3d1hQNzVEb3NOZVhEc1piQmtIYlI3WF9QUExkT2R3TW9tOW1ZZ0RpSGdELWxBbVRldmYtRmNUQjRxWjdZeS1RZnVvNFhvbU9pQzFfd2RyXzYxMnR4X3RpNFlBUzU?oc=5",
+          "source": "WSJ",
+          "sourceUrl": "https://www.wsj.com",
+          "publishedAt": 1790631240000,
+          "lang": "en"
+        },
+        {
+          "title": "‘Godmother Of AI’ Joining AMD In $8.2 Billion Deal For World Labs",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOZTRvUTQzcFF6Q2RkM1M2cU5DRWVQYnFBX2d2LUxzTWJwcDhWbzA0dF81Y1FCdFpxa3NEUkZDR1lVUjNEMFAzYkoyLTVGclpCS0s4TGItZDhzOUQ1bVExR0pnWHVUaHoySDhMT3hqTzZSbFRxdjhQUWF4c0diOTB6ZkxzRl9DNHJGWndkS3VPZ2ZuMEpnSkRvRHVHUF9wU2phQWZmeF84eVlQQkJOU1N4Tm5uU2Nxb3N1R2lr?oc=5",
+          "source": "Forbes",
+          "sourceUrl": "https://www.forbes.com",
+          "publishedAt": 1790629536000,
+          "lang": "en"
+        },
+        {
+          "title": "AMD to Acquire World Labs to Advance the Future of AI Compute",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE03cWFxdDlaSmpGNDJ1R2V6bEJBN1hybUQyamQtd2RaUmlKMFpEb3lWcDRLdUhvMHVRUnFmbkdNVzRkenI2QXB4SUgwakVSbWxfMS1VcUs2WHVCa1Bxa0lHOFpoTQ?oc=5",
+          "source": "AMD",
+          "sourceUrl": "https://newsroom.amd.com",
+          "publishedAt": 1790626328000,
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "d9c7ef5692",
+      "title": "오픈AI, 안전 우려로 차세대 모델 출시 철회",
+      "summary": "오픈AI가 안전성 우려를 이유로 다음 달 내놓을 예정이던 새 모델(GPT-6.1 아스트라)의 출시 계획을 철회했다. 오픈AI는 모델이 \"기준에 미치지 못했다\"고 밝혔고, 소식이 전해진 뒤 광통신·반도체 등 AI 인프라주가 급락했다.",
+      "topic": "안전·보안",
+      "importance": "major",
+      "companyIds": [
+        "openai"
+      ],
+      "latestAt": 1790662320000,
+      "articles": [
+        {
+          "title": "OpenAI holds off on releasing new model over safety concerns, saying it \"didn't quite meet the bar\"",
+          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBnUDU1QlU3cmVCTU85Y29JYm9RRTZJWHBLWnQzQlR1UnIwZGhjOUhYRXRTQ0xRUWRjVF9iQ0pSekpiQV9tVzB1Mjl5d3RrVkRNYXB5LTJEeWRabl90U0diR0ItZWl0c1NjeFlhZTdzZVItcUQ0NmNZ?oc=5",
+          "source": "CBS News",
+          "sourceUrl": "https://www.cbsnews.com",
+          "publishedAt": 1790662320000,
+          "lang": "en"
+        },
+        {
+          "title": "오픈AI, ‘인간 기만 우려’ GPT-6.1 아스트라 출시 계획 철회",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBnTlg4X3gxOUYxMUtKQlFjckdZU2VOUG9WakJpLTlvOEI1Z2VlSVhOaElXRTZ6NUhmTU1RcWZteFNlRmF0TlZVbEZELWhqU0pndEpHU3BleUpJWGQtZ1NIVg?oc=5",
+          "source": "한겨레",
+          "sourceUrl": "https://www.hani.co.kr",
+          "publishedAt": 1790649960000,
+          "lang": "ko"
+        },
+        {
+          "title": "오픈AI, 안전성 우려에 차세대 AI 모델 출시 철회",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBCT2ZlU1R1LXBSdUZvX0REVDRKQWQwYmNZbG9yV1Z2dFhtZkdVMkdEWlk1eUVuWUtTWHkxTFU4cWMxamhYZU9uRTF1akExZTAzSS1icWNrMkZ6X19KWGkxQ1dpc3Q0TEU?oc=5",
+          "source": "연합뉴스TV",
+          "sourceUrl": "https://www.yonhapnewstv.co.kr",
+          "publishedAt": 1790644920000,
+          "lang": "ko"
+        },
+        {
+          "title": "오픈AI 훈련 멈추자 반도체주 휘청, 보안주는 솟구쳤다",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNTURuQ3BpZ25GbkpLdmtVMnJnYkJ5em4yR1E4YnktY2NVaHQyY0twVTYyZVRHS3VncjdxUW5DNWdycVY3R1dHaTVfNDlqbWFGSTl5eUlnQXlkRE92UWsyWUphMWVtX2Y1NklxUlRrY1JDMWl3dDMwN3EzUEM5eEhucQ?oc=5",
+          "source": "조선일보",
+          "sourceUrl": "https://www.chosun.com",
+          "publishedAt": 1790642194000,
+          "lang": "ko"
+        },
+        {
+          "title": "오픈AI '학습 중단' 파장…광통신·반도체 등 AI 인프라주 급락",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBsUm1pOUtONjd6V1JiRnU0OW1wQVQ5Z2JMMGhtWDQyay1yWVhaZGFXbm9aQWRFSThLS2NteGluYzVTMlBpX2VKdk9ZRFNiTUJlei05U0RjUDBUMlVhTnpaSXVnVG0zRXViaW1SZW5SQTPSAXRBVV95cUxOd01pYzdORTBoWUg4VFdyLVFfR0h5cGxXQ1pUOXlId3h2MlhwY1ZuTWRtTzZyQWVTV253d0k3dGpNang5V0FqVkswckNaejVxVExsVnFuRGdaTTdDaVhBT3kxN2dKVU5SYm1TTTZkQzVaREd3cQ?oc=5",
+          "source": "연합인포맥스",
+          "sourceUrl": "https://news.einfomax.co.kr",
+          "publishedAt": 1790637333000,
+          "lang": "ko"
+        },
+        {
+          "title": "Exclusive | OpenAI Scraps Release of New AI Model Over Safety Concerns",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNcC0xNDExdTJodUowZi1yeWdFN3M5RlpvY3FvZ1lQeHltWGVkeG01ZTVlaHJ0TldqVVRhekJhWl9ZRTRLNHRqX1NQQVFKMW5NRnhBTmlUNWNpX1FBX3Myc3VlaGIxbFZTZDZYRlYwTGNVLTUtNnJScGJWcm5rX0hMMmNadFFmZw?oc=5",
+          "source": "WSJ",
+          "sourceUrl": "https://www.wsj.com",
+          "publishedAt": 1790636820000,
+          "lang": "en"
+        },
+        {
+          "title": "오픈AI, 안전 우려 때문에 내달 제품 출시 계획 취소",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE44cUpPZlE2NWpGdjdteG1qZ3cyNWZVT2Z5djF2S1A2VTVybVVwT0ZsZjl2NkhFRzBVcEpGdTR6VS1BdURCbmdPeVV6a2NRR1gxeWhlOElCMUN5RXViWl9iMdIBeEFVX3lxTE1tSW04X0lOWEFVbWJGUlFPSWtxcGNDRWI4a3BtcUNCZExuTTlCTFljS21VUkpJMllJVTQ0X3pwMWhvTFNzZ2NWWEV3dXBDTGdDaEJDdXNQdzBINDZ6TE81TWNsMnI0a0UxZkRvbS1ZWWQ2QXFybXR5RQ?oc=5",
+          "source": "뉴시스",
+          "sourceUrl": "https://www.newsis.com",
+          "publishedAt": 1790636213000,
+          "lang": "ko"
+        },
+        {
+          "title": "OpenAI abandons plan to release upcoming model as safety concerns escalate",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxON3J6Rk5EcVdTM1V5QmZWRVhSQW1DaDBmYU5YQ0JnM1hLMUxXbWVSVy1vdmZYWjA1T1N2WnRMNnB2N0NkVUwySjFlU05ISE5uRUFOdnIxYVVxVTkwaTlNcm5LdlduajAwZHFGcUExZ3Z5Rm5zZmNFcldST2pfN2pvWU5JRkY2US1TUVRZZ09jYjFLQUh3cnBsVHNCQmh4SHdKcC1mM0ZLRFNmV0o4R2tfUtIBtgFBVV95cUxQakpZOVlkQTEzOHdkWEI5ZmxXVUc1MFJCWkFLNkVxNld2NjA4WkRwUFV0TlM4ejJhWnZzc1JfcERhMFIwdUEtWU5pLU9tSzN6VnBLbFpKYkd3SEZqMnBJcFVJY3VLdjlqS2NWUDVKTVNXZ0otXy1RZE9XaGg4YVYydjJEM3BjSHlDXzZla2dleU9lOTZjem1oWDBqRWp1LXlyckFZcTNDd3lmazBVcGZJc0dUc0xGUQ?oc=5",
+          "source": "cnbc.com",
+          "sourceUrl": "https://www.cnbc.com",
+          "publishedAt": 1790634478000,
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "dd43064774",
+      "title": "앤트로픽 상장 서류 공개…\"AI는 인류에 존립 위험\"",
+      "summary": "로이터가 입수한 앤트로픽의 상장 신고서에 따르면 회사는 AI가 인류에 존립 위험을 줄 수 있다고 투자자에게 고지했고, 경영진이 \"Founder LLC\"를 통해 회사를 통제하는 구조를 택했다. 작년 매출이 12배로 늘었고 앞으로 AI 컴퓨팅에 702조원을 투입한다는 보도도 나왔다.",
+      "topic": "투자·M&A",
+      "importance": "major",
+      "companyIds": [
+        "anthropic"
+      ],
+      "latestAt": 1790650171000,
+      "articles": [
+        {
+          "title": "\"앤트로픽, 작년 매출 12배로…향후 AI 컴퓨팅에 702조원 투입\"",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1VSm5mdXluR1R0NVpfSmpIQU1YRmtrZE5FSnZTQzRKQWtqTy1RcTBvOEM5TnUyM0tHTlZPRVNXUDZuejYtdWFoWHkybjFCd1VTdjMtVjVqQ2c3M2ozQ2g3YdIBYEFVX3lxTE1VSm5mdXluR1R0NVpfSmpIQU1YRmtrZE5FSnZTQzRKQWtqTy1RcTBvOEM5TnUyM0tHTlZPRVNXUDZuejYtdWFoWHkybjFCd1VTdjMtVjVqQ2c3M2ozQ2g3YQ?oc=5",
+          "source": "연합뉴스",
+          "sourceUrl": "https://www.yna.co.kr",
+          "publishedAt": 1790650171000,
+          "lang": "ko"
+        },
+        {
+          "title": "EXCLUSIVE: Anthropic warns AI may pose 'existential risks to humanity' in IPO filing",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNVndoU28yRmZKcU1nd1MtOThsNXYtejlvampCQXFwRXIxcUJWdWZ5R0twWnM2czMyMmt3cERxQmhEYk5pWVh0UExTMVEzU3k0Tk5wa3Zkdkxkc0E3aTIzbEhOVmZrWmZPajJJaFRBb2JxUElza0puQW56MGpXM21lMDBSR1BDTkY3Ullja3pTQW1mQ20wWVhDTnMxRHB1MkFyUFQySkoxQldxNmFkNmp1dG95dndFUmZOb2c?oc=5",
+          "source": "Reuters",
+          "sourceUrl": "https://www.reuters.com",
+          "publishedAt": 1790641020000,
+          "lang": "en"
+        },
+        {
+          "title": "EXCLUSIVE: Anthropic leaders to control AI lab via 'Founder LLC' to promote public good over market forces",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPY2tWZFZVM0xSdkV1cmY3M2lIWmhGTVhxZnV0aWpOS3ppd01pXzdDSTVybEw4SGpjbzdITTlQekluVUVuV0hSNlN6OUNvMEZyVTBlX1phS2JJVVBtejNWQ1BCdFBhT3FvN09XRFBnU2RLN1RmNVktT213VkxVbU4xUV9yT1d6SEZVUTQtN0RYV25xcm5XVk14dDhZV09QbkUwbHVlX0RQNGxEWml2bXdRTmxhd0cwQnlBLUsxbzViTUZkQ3p0S0s3d21DSlB1bUV6cnc?oc=5",
+          "source": "Reuters",
+          "sourceUrl": "https://www.reuters.com",
+          "publishedAt": 1790640540000,
+          "lang": "en"
+        },
+        {
+          "title": "EXCLUSIVE: Anthropic's IPO prospectus shows sweeping AI vision, surging costs",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNbVlPeVROc0FBWTl6a0ZCZXdPVF93WjdPT1BFV2xkQmlyRE9oYS1wRF9yWk0zV1EwSlJ5Vmt0UkpucHdQWUpSbGdzUmdVeC1EWm5sMzBkTUNQMkg3ekVYMkMtemVySUxhWnRCTWRNLTA1Vl8tZVZkRU80ZVk4TjdZbE5LdjJ5VzJXbUlmM1FvMnJqTFE4TkZVeEJFVndEMmpIbGN5WDRxclhHX0JZdHp6LWlad3JTakZr?oc=5",
+          "source": "Reuters",
+          "sourceUrl": "https://www.reuters.com",
+          "publishedAt": 1790637420000,
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "f93d3fce83",
+      "title": "엔비디아, AI 에이전트 폭주 막는 보안 플랫폼 공개",
+      "summary": "엔비디아가 AI 에이전트의 탈옥·오작동 같은 위험 행동을 막는 보안 플랫폼을 공개했다. 엔비디아는 이 소프트웨어가 허깅페이스 해킹도 막을 수 있었다고 밝혔고, 문제가 생기면 밀리초 만에 격리한다고 설명했다.",
+      "topic": "안전·보안",
+      "importance": "notable",
+      "companyIds": [
+        "nvidia",
+        "hugging-face"
+      ],
+      "latestAt": 1790659300000,
+      "articles": [
+        {
+          "title": "울타리 넘으면 칩이 잡아 세운다... 엔비디아, AI 에이전트 감시 장치 하드웨어에 심었다",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1ZMGZyMVZxSnRONTJEN2NtdmlCMnI1VkpBOUhZRUZ3UGp6OWppM2RPaHRXUk1FZ2VpQ0NaYkRNY2FFOWFad2dqU1M3SFUydHlSbUczOVN1LURoeVB0dHhWMi1YSFZJZ3F0cXVN?oc=5",
+          "source": "보안뉴스",
+          "sourceUrl": "https://www.boannews.com",
+          "publishedAt": 1790659300000,
+          "lang": "ko"
+        },
+        {
+          "title": "엔비디아, AI 에이전트 전 계층 보안 강화…“AI 보안은 엔지니어링 문제”",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1OTzM3X3R4SFM3Y1pEa2pLMnl2S0JTSktlelVmaUlRLWVGeTlyQks4Rm9kNUZjTEZ4NXg2YkdzcTZlN3JLaElkck1VRFd6VUkyZ1JLWWo1V2VLM3RIalliOVJXTXJUZXM?oc=5",
+          "source": "aitimes.kr",
+          "sourceUrl": "https://www.aitimes.kr",
+          "publishedAt": 1790655786000,
+          "lang": "ko"
+        },
+        {
+          "title": "엔비디아, 'AI 탈옥' 막는 플랫폼 공개…\"모델 안전장치만으론 한계\"",
+          "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1TSzlFWC03TEZqYjN3TjRBREtTb18yYXpOemo1bnVZaDZLYjQ4ZEZQMXBwX3RkZV8tTlVObVJCSFloSUpfWlhRak5hcXk0bGs?oc=5",
+          "source": "v.daum.net",
+          "sourceUrl": "https://v.daum.net",
+          "publishedAt": 1790643784000,
+          "lang": "ko"
+        },
+        {
+          "title": "Nvidia unveils security platform to stop AI agents from going rogue",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNLUs1WDRHbkRJcDEzM0tsZ1BWNlZzS2pMVm94RkllS3hiR0Q2UUlPTnc0SVZUcGRCMUVoNDhvTjVKdkhuajJ3RXR2WnJRS2xoRTFwNUREV09yc0dFMjc2YVpCY0RTMW1JbXdDOGpXY283UFVBcG1YRlh6UzBaS0lPOEYwck9UanNBM1dDdXRvVjhQNWtNR1NJWENoemNqNmtHMi1zZWt5UFZwdw?oc=5",
+          "source": "AP News",
+          "sourceUrl": "https://apnews.com",
+          "publishedAt": 1790633640000,
+          "lang": "en"
+        },
+        {
+          "title": "엔비디아, AI 돌발행동 막는 안전플랫폼 공개",
+          "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBNMHBHTUk0N3o1TnZwUFhKSDR2dVlwQ2dDcGl1NlVkbXRxWXlqWWZLQlR5ekZvMGRzVXhNcUhUQ21fMmhtSmpfNWwxbw?oc=5",
+          "source": "v.daum.net",
+          "sourceUrl": "https://v.daum.net",
+          "publishedAt": 1790631300000,
+          "lang": "ko"
+        },
+        {
+          "title": "Nvidia releases AI safety software it says could have stopped Hugging Face hack",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNSVREakRaN2V6OWo0bzNFcVBHb1VZMzRVS29mcWF4XzZwSmdxLVRublBqSTE5ZlNBaHBKb0lTU1o2SWV0V0t1U3M3TVl1ZnlJWGVJRGxKclM5RkphYzhzU3FlNkZHNDk3TUZhdW54dGtydmR3MFR2ZFVZdWItaVpsNjZYX2hIbjVHcTM0ZTVqLVd6UHV2OGY4eFM4ZW1va1pCSF90VzlZd3BSUjVkY1RJRzV2ZGFEUnlnbDY1d0ZjOFZoYXBVRU5YZEM0Zmk?oc=5",
+          "source": "Reuters",
+          "sourceUrl": "https://www.reuters.com",
+          "publishedAt": 1790606776000,
+          "lang": "en"
+        },
+        {
+          "title": "엔비디아, 'AI가 통제 벗어난 오작동·위험행동 막을' 새 보안플랫폼 공개",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE4zVHBqMDJOMzNqZXFuUDJCalI4T3hZRF82T054cXd0amttT2dzNnRzTGxRNTNVN0haU3BVcDkyZFkwV2lsR2R0Mm1xdnNGZEQydF9vZTRoSmFIMlRidW43MW5iRllxSFhTQldMYXd6UXo1dFkzcUpoOdIBeEFVX3lxTE4zVHBqMDJOMzNqZXFuUDJCalI4T3hZRF82T054cXd0amttT2dzNnRzTGxRNTNVN0haU3BVcDkyZFkwV2lsR2R0Mm1xdnNGZEQydF9vZTRoSmFIMlRidW43MW5iRllxSFhTQldMYXd6UXo1dFkzcUpoOQ?oc=5",
+          "source": "뉴시스",
+          "sourceUrl": "https://mobile.newsis.com",
+          "publishedAt": 1790597791000,
+          "lang": "ko"
+        },
+        {
+          "title": "Nvidia launches new tool to keep AI agents from going rogue",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE44cmVmSXJrWFJ1RkRhbWNrNmVfUGVqNkM3M1UwY09SREhJRUJPREMxZ0VOcjc0ZjN6c3BPbEFuaDVKVTJQbDRhRXdCazB6TG43eXlSeW5DNzd2MmdvOUg4S2d6TC1YbWM1RHN6QktBdVE?oc=5",
+          "source": "CNN",
+          "sourceUrl": "https://www.cnn.com",
+          "publishedAt": 1790597272000,
+          "lang": "en"
+        },
+        {
+          "title": "Nvidia Releases Software It Says Can Prevent AI Agents From Going Rogue",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOLTVMVzBocmRINk1yNmRPX3RrRUFUeUd5N2s1ejYwam83ZFV5WXpfaFVFUGtNLVRKM1J5eFg5T3RBZzFOVTlFZ3BYRElXRFpRank0N2VlcFN5clpxUG02ZzFLWG1MTTBLcXBCU3I0a3FFNEFtWXVxUkJPZ1RVWkc4dDJHMlNCTHZfUHRJb09sWnpqVFNsdHpqRHVibFk3cG1jUXkxQW9TTjdxcFRk?oc=5",
+          "source": "WSJ",
+          "sourceUrl": "https://www.wsj.com",
+          "publishedAt": 1790596800000,
+          "lang": "en"
+        },
+        {
+          "title": "엔비디아,AI에이전트 해킹막는 보안시스템 공개…\"밀리초만에 격리\"",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ENmtha3NfVy11Tm1XNU5vZ2wyYS14MVNZbFA2UHNZei1HNWlmZmFTU24zYXN3b3h0Wlp1ZjFFZ3JXNUZ0Vl9pbV9xcWhtSEVWdFBrMlJvTUhhdw?oc=5",
+          "source": "한국경제",
+          "sourceUrl": "https://www.hankyung.com",
+          "publishedAt": 1790590532000,
+          "lang": "ko"
+        },
+        {
+          "title": "엔비디아, AI 에이전트 보안 플랫폼 공개…\"속도조절 대신 기술\"",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNc3IwT0RQS0o2ZXkyeDlLSHpQbl9TTmFXaG5mQXo5dUJna0JaY05OUlg1dE80SDcyWUJoX0ZBSFlkbm9WLURUX1pJM2p6R3FiSGh3OHV1RnBYb3VOdTR0NmtDZURNeFRRNDJBVkJvamRuUWlhb0NNMDdWVHBlaGtsYQ?oc=5",
+          "source": "edaily.co.kr",
+          "sourceUrl": "https://www.edaily.co.kr",
+          "publishedAt": 1790590328000,
+          "lang": "ko"
+        }
+      ]
+    },
+    {
+      "id": "d254a3ad14",
+      "title": "삼성, KKR 투자 AI 인프라 기업에 10억 달러 투입",
+      "summary": "삼성과 계열사들이 KKR과 엔비디아가 투자한 AI 인프라 기업 헬릭스 디지털에 10억 달러를 투입한다. 블룸버그는 이 회사를 전 AWS 임원이 이끄는 AI 데이터센터 기업으로 소개했다.",
+      "topic": "반도체·인프라",
+      "importance": "notable",
+      "companyIds": [
+        "samsung"
+      ],
+      "latestAt": 1790654040000,
+      "articles": [
+        {
+          "title": "Samsung Bets $1 Billion on AI Data Centers From Ex-AWS Chief",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNYWpnZGR0dFNqY0Y1bU1WT2FFaG9zZERNU2FxRGRzQjV6azRrTGNDVXVMTG5NQWh5ODF4X3NfbnJVU1BGXzlGaHpiZXl5OW1xNG16THE2OXoxZDBvWklsUG9tVWZCRzdKaEpLQVR3RmhvUzAwWEpyX0lBaDN3aWhOcmpWOFJCQ2NreTBIaHpHVXdlVXpXemVkXzRjVnlwQTJESnVFVlF0NENYNUtySURyT0pUNA?oc=5",
+          "source": "Bloomberg.com",
+          "sourceUrl": "https://www.bloomberg.com",
+          "publishedAt": 1790654040000,
+          "lang": "en"
+        },
+        {
+          "title": "Samsung to inject $1 billion into Nvidia- and KKR-backed AI infrastructure firm",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTZ1UjNVY2c5emJzWG1DWERwTHNmaWJUN3IxRTV2bWl0Rk1TM3UtbWNyRHZwalltSVptSUtTU0tlRldBUktJNnh3dl9iNHVWR2tjdjlwTEI3VElKTVV4SHhwZ2hwNW9qRDNkNTFwMi1RREtTSzh3SHFidnRwWWI4ZEhaQlJfTFlGX2M00gGQAUFVX3lxTE5adHBjTmY1OUh1bDVPekFGekc4Y3VSZDFfc1p1NHgtd1ZhNkxPZDdFd2s3N0doaElvNjlDMVQycWNjUlh6TWw5V0hxYWpDeUNnLVpUVFJ3S2Q5dWM1TDNPaGlhQWZpMXRoOEFLOVZVdVVkczYyM3pPWUdaTHU5d3laTE96Ny1QbUk0ckFqNDJkNw?oc=5",
+          "source": "cnbc.com",
+          "sourceUrl": "https://www.cnbc.com",
+          "publishedAt": 1790640000000,
+          "lang": "en"
+        },
+        {
+          "title": "Samsung, affiliates commit $1 billion to KKR-backed Helix Digital AI buildout",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZTc4RHR0djNqMTJyMmlTMEFFZlRDeW1Fa2laZGxYVzd3SFFiOUJBN1RCRm9kbTlpYVAyY2N2ZWo4Sl9peF9ub0ZoVFJRaWZ6R1JCejVCOUhVbDZPRG5wWVA3Sm9ZQjdUMTdjNmJ0WXA3eHJmM3V1ZklDMGZjdUxfT1dBU0U3QmxCR29MMWpVQjYwb1AxOTVwY3ZFdTVTSW9PUUdlYjZQLWRuNDBZRmhMVDBKOHFnQU12NkRv?oc=5",
+          "source": "Reuters",
+          "sourceUrl": "https://www.reuters.com",
+          "publishedAt": 1790639760000,
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "19a0a657a1",
+      "title": "앤트로픽, 효율 높인 \"소넷 5.5\" 출시",
+      "summary": "앤트로픽이 효율을 높인 새 모델 소넷 5.5를 출시했다. 국내 매체는 이를 오픈AI의 \"가성비 전략\"에 맞선 행보로 해석했다.",
+      "topic": "모델·제품",
+      "importance": "notable",
+      "companyIds": [
+        "anthropic",
+        "openai"
+      ],
+      "latestAt": 1790639460000,
+      "articles": [
+        {
+          "title": "[AI는 지금] 앤트로픽, 오픈AI '가성비 전략'에 맞불…소넷 5.5 공개",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBqTTNDM01TRjhmRXJmZzUzaHpubXo2eWw4d3YyNXBCRXczZmkwOVFfLUdWV29kQlJySEFiVXVXRml3Y2oybTZBU2tmNDhnRlB3eTNrYjZR?oc=5",
+          "source": "지디넷코리아",
+          "sourceUrl": "https://zdnet.co.kr",
+          "publishedAt": 1790639460000,
+          "lang": "ko"
+        },
+        {
+          "title": "앤트로픽, 효율 높인 소네트5.5 출시…AI속도조절론 이후 두번째",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8wb1NlMkFhSUxaVkhnamk5MkkwSEJRSjNwUUdEWmxiWTl6LUQyQkMtOHoxbmY2NVpfODZjSmZreF9BYmRnRVpTd0FDRnF3VzVkZmVSUVJBSXpKMDTSAWBBVV95cUxOQ2dsbmZub2VLTVV4M0N6YzhuU3lRUTVxaWllSExtaThQWjh3NEtaNnBqZ3RLX2JhSTNBR25GM0FaTWpqOFJKc2U2U0hwRlk1YzF0ZW80UmRVaHYxZ3NEZnk?oc=5",
+          "source": "연합뉴스",
+          "sourceUrl": "https://www.yna.co.kr",
+          "publishedAt": 1790630846000,
+          "lang": "ko"
+        }
+      ]
+    },
+    {
+      "id": "d2fd59306c",
+      "title": "카카오, AI안전연구소와 3단계 안전성 검증",
+      "summary": "카카오가 AI안전연구소와 업무협약을 맺고 AI 안전성 평가 체계를 구축한다. 언어모델뿐 아니라 에이전트까지 배포 전후로 안전성 평가를 받는다.",
+      "topic": "안전·보안",
+      "importance": "notable",
+      "companyIds": [
+        "kakao"
+      ],
+      "latestAt": 1790661418000,
+      "articles": [
+        {
+          "title": "카카오, AI안전연구소와 AI 안전성 평가 도구 개발",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE0zS3FsaVlYeWFPT3hXQ3BySmZLN0xSd1Y3b00wT3VHdi1VeUcydjFmNUd6NWI5X29TdnFRSGhfcEloVFlZM0N5dmswMGpKLVdSVFJkRDFpdW5NcnRGYkZyQmlEZkVaQWpNYmc?oc=5",
+          "source": "AI타임스",
+          "sourceUrl": "https://www.aitimes.com",
+          "publishedAt": 1790661418000,
+          "lang": "ko"
+        },
+        {
+          "title": "카카오, 인공지능안전연구소와 AI 안전성 평가 체계 구축을 위한 MOU 체결",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5taGpqSC12Q2RUSUdkYjFoWnpFV0p5WVZrWEl0cU83WVFBdTBJZWlvaG9ZT3ZzbTUyTlhERDBpUGdxOTVkTHZBTnZvTWl4Mi1jVkcybEhn?oc=5",
+          "source": "카카오",
+          "sourceUrl": "https://www.kakaocorp.com",
+          "publishedAt": 1790650238000,
+          "lang": "ko"
+        },
+        {
+          "title": "[AI픽] 카카오 AI, 배포 전후 안전성 평가받는다…에이전트까지 확대",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1xYlE4TVA4V0N4NEQ4S3JfZWNLWjZQOHg2bEZzZzVPSkhZVFotc0YzaDFNdVB1WEhPSkJHaGNVdVVlX2t4YlJTU29rYkZJYllqVUs3VERDWndKTTZuWTZMONIBYEFVX3lxTE1xYlE4TVA4V0N4NEQ4S3JfZWNLWjZQOHg2bEZzZzVPSkhZVFotc0YzaDFNdVB1WEhPSkJHaGNVdVVlX2t4YlJTU29rYkZJYllqVUs3VERDWndKTTZuWTZMOA?oc=5",
+          "source": "연합뉴스",
+          "sourceUrl": "https://www.yna.co.kr",
+          "publishedAt": 1790645481000,
+          "lang": "ko"
+        },
+        {
+          "title": "카카오, AI 안전성 평가체계 구축…모델서 에이전트까지 확대",
+          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9XN0w2OVZlZkFSLXoyZGcyMEczR0t6cG9DT2NvTXAzUlREWl8wLUpyTlBxQ0p1SmFEc0ljUGNYSUJfcWhKalhwbVFTWE5iLThJcFNpbHpyWFN6SXRZZzZHNWIxX2lEZw?oc=5",
+          "source": "디일렉",
+          "sourceUrl": "https://www.thelec.kr",
+          "publishedAt": 1790645445000,
+          "lang": "ko"
+        },
+        {
+          "title": "\"언어모델 넘어 에이전트까지\"… 카카오, 3단계 AI 안전성 검증 나선다 |",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1hTll4Yl80RFdZYllMUVJTcGZvVDNfcVZBTExfd0Q2TmkzNTVDdVdIQmY4YlFEam5LWldueEF2SG9FMlA0S1h2LVBoenRnTEhZQUhTSFY4OHVFQy1fRC03ejlKZ2tjLWV0M3FGaC1KWVBWRHhO?oc=5",
+          "source": "IT조선",
+          "sourceUrl": "https://it.chosun.com",
+          "publishedAt": 1790645253000,
+          "lang": "ko"
+        },
+        {
+          "title": "카카오, 인공지능안전연구소와 AI 안전성 검증 확대한다",
+          "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5FUFZmdnBpQkhyRXdmcEFtX2x5UkhBcDdKMkRFaUpyRjl6bGpMR3VhMWNud3c2NHZhR1JMTjBrdXVtejVqbVR1Qk5FS01Hdw?oc=5",
+          "source": "전자신문",
+          "sourceUrl": "https://www.etnews.com",
+          "publishedAt": 1790642669000,
+          "lang": "ko"
+        },
+        {
+          "title": "Kakao, AI Safety Research Institute sign MOU to build AI safety evaluation framework",
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9GNC1yRVJwMDBuN0didV9zRmdIVURqVnd6bWp3YzdzTGYxNmp5XzNXUDU3TmI4TGxJQnFfV3V0Y3g5cWVRd0kyMTdZTC1YUm5sVjBpZ2FkQQ?oc=5",
+          "source": "헤럴드경제",
+          "sourceUrl": "https://mbiz.heraldcorp.com",
+          "publishedAt": 1790641218000,
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "115bd5d6e1",
+      "title": "메타 AI 안경에 네이버지도 길 안내",
+      "summary": "메타의 AI 안경에서 네이버지도 기반 도보 길 안내를 쓸 수 있게 된다. 두 회사는 올해 안에 이 기능을 선보일 예정이다.",
+      "topic": "모델·제품",
+      "importance": "minor",
+      "companyIds": [
+        "naver",
+        "meta"
+      ],
+      "latestAt": 1790650500000,
+      "articles": [
+        {
+          "title": "Meta Partners with Naver to Bring AI Glasses Walking Navigation This Year",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBkdXg2LUVSVUhkZ2UwU0FURl83cHpPWDZ0WGwtOEJRdmxoamk5Q3RGQVRBOWtiU1g2UmVFVnpqUWpWa3Z6M2FZSlVzTklhUkExdTI0TnZENWQ5Yl9URDVScUF2T05aUEFEZWZ0Z0lGVlJLMVllM1E?oc=5",
+          "source": "finance.biggo.com",
+          "sourceUrl": "https://finance.biggo.com",
+          "publishedAt": 1790650500000,
+          "lang": "en"
+        },
+        {
+          "title": "Meta AI glasses tap Naver Map for hands-free navigation",
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9xNWxweUZZX3ZHaE1mdTNLdkR5amxDZkxoUGJDWHpLcjVLTGppZ2hybVZTclFaQTBzRjZyMjN1SnllOHRmal9Sd0hSUVktN2xoaGlhbG1ZWQ?oc=5",
+          "source": "The Korea Herald",
+          "sourceUrl": "https://www.koreaherald.com",
+          "publishedAt": 1790648783000,
+          "lang": "en"
+        },
+        {
+          "title": "메타와 협업한 네이버...\"AI 안경으로 네이버지도 길 찾기 가능\"",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9WcXZuLXpQWEVFeUhxR2xlZmNqak13SEhZTUZNc0JmWEViV0JyOVVjN0xBNk9rS0dqdkVNbmNzRXBGV0N0cXk4Vjd5Tmc3SmxJNGJEYTdtSG4yQmFxV0RBTw?oc=5",
+          "source": "아시아경제",
+          "sourceUrl": "https://www.asiae.co.kr",
+          "publishedAt": 1790642417000,
+          "lang": "ko"
+        }
+      ]
+    },
+    {
+      "id": "ba8a680ca5",
+      "title": "일레븐랩스, 90개 언어 음성 모델 v4 공개",
+      "summary": "일레븐랩스가 90개 언어를 지원하는 음성 모델 v4와 v4 Turbo를 공개했다. 10초 분량의 목소리만으로 다국어 음성을 만들 수 있고 감정 표현 제어도 강화됐다.",
+      "topic": "모델·제품",
+      "importance": "minor",
+      "companyIds": [
+        "elevenlabs"
+      ],
+      "latestAt": 1790662271000,
+      "articles": [
+        {
+          "title": "ElevenLabs v4 needs 10 seconds of your voice to make it speak 90 languages",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNMjZURGJoTkRsbl9yVEp2VVF1cG1pVXo0YXhGSGpjZkhaenNQNHB6UDNkZk0yRDRrWFRhNHNfSkQyb08xVXh6SXNrT2htVWRHeTNWSk5FWjFzd0FKU3JNcGs0cXRmQnhaM1Z6WlJHWEdWQi1Bd3BJcGRSTFlLUnFzSUh5UnVtVzd6ODJlZjlrdExfSThz?oc=5",
+          "source": "Martin Cid Magazine",
+          "sourceUrl": "https://www.martincid.com",
+          "publishedAt": 1790662271000,
+          "lang": "en"
+        },
+        {
+          "title": "\"창작부터 상담까지\"…일레븐랩스, 90개 언어 지원하는 음성 AI 공개",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE4taVlEUnF4WGhjOTU3VHNZZWhwRGRORDd6N1pxTXdId3lzX2FrcHl0eVFzbjY0cEtnYjdfQU96MzNEOVJaZWQzLVlOd1VNV0NsVGlDRkdn?oc=5",
+          "source": "지디넷코리아",
+          "sourceUrl": "https://zdnet.co.kr",
+          "publishedAt": 1790646114000,
+          "lang": "ko"
+        },
+        {
+          "title": "ElevenLabs launches Eleven v4 and v4 Turbo voice models",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNLXdqMTdNYnctaTk0NUVGQTJ6eDBUbzMxbEFGeFgtS2h4Ty1nU3p4d1NjSTdXck05RWNhenFQNnIxZ0Q2cHJ6YW04WWxQQU5nUTZna0RmSzJnaGVzc2hrdlY5T0RxeFhKdkMyN0lZazljZWxWVXlxWlJOWk5fZEh0d2Fzd0hVVzFnckFvSHJkME4?oc=5",
+          "source": "TestingCatalog AI News",
+          "sourceUrl": "https://www.testingcatalog.com",
+          "publishedAt": 1790612559000,
+          "lang": "en"
+        },
+        {
+          "title": "ElevenLabs’ new v4 speech model supports more expression control and 90 languages",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQM0YxMFRmM2Z2ZUYzR1FEWWRjTXBBa3RaMzdWR3VIT0NxbnY0S1pjNkpSdGNiYnRNZWFObDdwbTI2SGJ2ZFlMQ01kRE5aT1NvcXhIYjA2Sk9ab0pEYXpvMmpDNmdrNHJoWGJJYUxmUmVmSG5uWnZlQUZ5Rl9uVHl6cnFzc0VuZ2JRWXNWTk90eEU3aVgzRjZBdnI3RWtuWkNuU1hXM2lhZkVqQUFIdjE0d094U1ZSQQ?oc=5",
+          "source": "TechCrunch",
+          "sourceUrl": "https://techcrunch.com",
+          "publishedAt": 1790604000000,
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "f475c88218",
+      "title": "TSMC, 첨단 패키징 공장 5곳 추가 건설",
+      "summary": "AI 반도체 수요가 급증하자 TSMC가 대만에 최첨단 패키징 공장 5곳을 더 짓기로 했다.",
+      "topic": "반도체·인프라",
+      "importance": "minor",
+      "companyIds": [
+        "tsmc"
+      ],
+      "latestAt": 1790634389000,
+      "articles": [
+        {
+          "title": "AI 반도체 수요 폭증…TSMC, 첨단 패키징 공장 5곳 더 짓는다",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBpM1BPOUpkNTJGb1AzTUpKRjhTT2NkQ3RyZ1ZPeW1vT1BDMW1MeUdaeUgyMG5ROFZjZWpKLWxQQTBBei1IU0tVa3pTZDE1dGVLQ3J5NEQ1RmhRbXprV3FZamxzTTl4RWdINDFhRmt3?oc=5",
+          "source": "알파경제",
+          "sourceUrl": "https://www.alphabiz.co.kr",
+          "publishedAt": 1790634389000,
+          "lang": "ko"
+        },
+        {
+          "title": "“대만을 AI의 도시로”… TSMC, 최첨단 패키징 공장 5개 추가 건설 추진",
+          "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9KdDlWZjdfbjI2ek5MUUZTbVBSalhmUmYzSkRRWVFGS2JRSGxrdEIzUlFpSU5SNk5vOFNYSWhWWkNNNFRQWWV6bjlaTTE1ZHdfNTdtYg?oc=5",
+          "source": "v.daum.net",
+          "sourceUrl": "https://v.daum.net",
+          "publishedAt": 1790587980000,
+          "lang": "ko"
+        }
+      ]
+    }
+  ]
+}

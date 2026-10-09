@@ -1,0 +1,18 @@
+{
+  "name": "ai-map",
+  "version": "0.2.0",
+  "private": true,
+  "description": "전 세계 AI 기업을 지도에서 한눈에 — 위치, 리더, 주력 제품, 주가, 뉴스, AI 브리핑",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "sample": "BRIEFING_FIXTURE=test/fixtures/briefing-sample.json node server.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.129.0",
+    "zod": "^4.6.5"
+  }
+}
