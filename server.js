@@ -2,6 +2,7 @@
 //   /api/quotes?symbols=…      delayed stock quotes (Yahoo Finance)
 //   /api/news?id=…&lang=ko|en  per-company news (Google News RSS)
 //   /api/briefing              AI briefing: today's stories grouped and summarized by Claude
+//   /api/archive?week=…        briefing archive by week, with a weekly recap
 //   /api/board                 comparison board: 1y series, returns, market cap for listed companies
 //   /api/watch[/…]             data watch (admin, this machine only): review and apply data changes
 'use strict';
@@ -21,7 +22,8 @@ try {
 const { getQuotes } = require('./lib/quotes');
 const { fetchNews } = require('./lib/news');
 const { getCompanies } = require('./lib/companies');
-const { getBriefing } = require('./lib/briefing');
+const briefing = require('./lib/briefing');
+const { getArchive } = require('./lib/archive');
 const { getBoard } = require('./lib/board');
 const watch = require('./lib/watch');
 
@@ -142,7 +144,8 @@ async function handleWatch(reqUrl, res, req) {
 const API_ROUTES = {
   '/api/quotes': handleQuotes,
   '/api/news': handleNews,
-  '/api/briefing': async (reqUrl, res) => sendJSON(res, 200, getBriefing()),
+  '/api/briefing': async (reqUrl, res) => sendJSON(res, 200, briefing.getBriefing()),
+  '/api/archive': async (reqUrl, res) => sendJSON(res, 200, getArchive(reqUrl.searchParams.get('week'))),
   '/api/board': async (reqUrl, res) => sendJSON(res, 200, await getBoard()),
 };
 
@@ -188,4 +191,5 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
   console.log(`AI Map running at http://localhost:${PORT}  (데이터 점검: /admin.html)`);
   watch.startScheduler();
+  briefing.startScheduler();
 });

@@ -836,7 +836,8 @@
         </div>`
       : '';
     const list = stories.length ? `<ul class="story-list">${stories.map(storyCardHTML).join('')}</ul>` : '';
-    const foot = b ? `<p class="sidebar__foot">${esc(briefingFootText(b))}</p>` : '';
+    const archiveLink = '<a class="briefing-archive-link" href="#report">지난 브리핑 · 주간 리포트 →</a>';
+    const foot = b ? `<p class="sidebar__foot">${esc(briefingFootText(b))}</p>${archiveLink}` : '';
     const notice = res && res.status === 'ready' ? '' : briefingNoticeHTML(res, stories.length > 0);
     els.briefingPane.innerHTML = `${head}${notice}${list}${foot}`;
   }
@@ -1151,6 +1152,7 @@
     board: { module: () => window.AIMapBoard, hash: 'board' },
     graph: { module: () => window.AIMapRelations, hash: 'relations' },
     models: { module: () => window.AIMapModels, hash: 'models' },
+    report: { module: () => window.AIMapReport, hash: 'report' },
   };
 
   function setView(next) {
@@ -1250,6 +1252,7 @@
     window.AIMapBoard.setQuery(state.query);
     window.AIMapRelations.setQuery(state.query);
     window.AIMapModels.setQuery(state.query);
+    window.AIMapReport.setQuery(state.query);
     if (view !== 'map') return;
     if (state.sidebarMode !== 'companies') setSidebarMode('companies'); // results show in the company list
     applyFilters();

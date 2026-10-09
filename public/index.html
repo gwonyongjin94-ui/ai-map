@@ -36,6 +36,7 @@
         <button type="button" data-view="board" aria-pressed="false">비교 보드</button>
         <button type="button" data-view="graph" aria-pressed="false">관계도</button>
         <button type="button" data-view="models" aria-pressed="false">모델</button>
+        <button type="button" data-view="report" aria-pressed="false">리포트</button>
       </nav>
       <label class="search">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -83,6 +84,7 @@
     <section class="board" id="board" aria-label="상장사 비교 보드" hidden></section>
     <section class="board relations" id="relations" aria-label="AI 기업 관계도" hidden></section>
     <section class="board models" id="models" aria-label="AI 모델 출시 타임라인" hidden></section>
+    <section class="board report" id="report" aria-label="주간 AI 리포트" hidden></section>
   </div>
   <div class="viz-tooltip" id="vizTooltip" role="tooltip" hidden></div>
 
@@ -95,6 +97,7 @@
   <script src="board.js"></script>
   <script src="relations.js"></script>
   <script src="models.js"></script>
+  <script src="report.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
