@@ -73,6 +73,14 @@
   function relationsOf(id) {
     return RELATIONS.filter((r) => r.from === id || r.to === id);
   }
+
+  const MODEL_KINDS = window.AI_MODEL_KINDS || {};
+  const MODELS = (window.AI_MODELS || []).filter((m) => byId.has(m.company) && MODEL_KINDS[m.kind]);
+
+  // Newest first; a month-only date ('2026-01') sorts as the start of that month.
+  function modelsOf(id) {
+    return MODELS.filter((m) => m.company === id).sort((a, b) => b.date.localeCompare(a.date));
+  }
   const allSymbols = [...new Set(COMPANIES.flatMap((c) => c.listings.map((l) => l.symbol)))];
 
   // ───────── Utilities ─────────
@@ -584,6 +592,7 @@
           <button type="button" class="tab" role="tab" id="tab-overview" data-tab="overview" aria-controls="panel-overview" aria-selected="${tab === 'overview'}">개요</button>
           <button type="button" class="tab" role="tab" id="tab-news" data-tab="news" aria-controls="panel-news" aria-selected="${tab === 'news'}">뉴스 <span class="tab__badge"></span></button>
           <button type="button" class="tab" role="tab" id="tab-relations" data-tab="relations" aria-controls="panel-relations" aria-selected="${tab === 'relations'}">관계 <span class="tab__badge">${relationsOf(c.id).length || ''}</span></button>
+          <button type="button" class="tab" role="tab" id="tab-models" data-tab="models" aria-controls="panel-models" aria-selected="${tab === 'models'}">모델 <span class="tab__badge">${modelsOf(c.id).length || ''}</span></button>
         </div>
 
         <div class="tabpanel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-panel="overview"${tab === 'overview' ? '' : ' hidden'}>
@@ -631,6 +640,10 @@
 
         <div class="tabpanel" id="panel-relations" role="tabpanel" aria-labelledby="tab-relations" data-panel="relations"${tab === 'relations' ? '' : ' hidden'}>
           ${relationsPanelHTML(c)}
+        </div>
+
+        <div class="tabpanel" id="panel-models" role="tabpanel" aria-labelledby="tab-models" data-panel="models"${tab === 'models' ? '' : ' hidden'}>
+          ${modelsPanelHTML(c)}
         </div>
       </div>`;
     els.detail.hidden = false;
@@ -699,6 +712,42 @@
           <h3 class="section__title rel-title rel-${g.type}"><span class="rel-key" aria-hidden="true"></span>${esc(g.title)} · ${g.items.length}</h3>
           <ul class="rel-list">${g.items.map(item).join('')}</ul>
         </section>`).join('')}
+      ${foot}`;
+  }
+
+  // ───────── Models (detail tab) ─────────
+  const DETAIL_MODELS_MAX = 12;
+
+  function fmtModelDate(date) {
+    const [y, m, d] = date.split('-');
+    return d ? `${y}. ${Number(m)}. ${Number(d)}.` : `${y}. ${Number(m)}.`;
+  }
+
+  function modelsPanelHTML(c) {
+    const list = modelsOf(c.id);
+    const foot = `<p class="detail__foot">모델 정리 기준 ${esc(window.AI_MODELS_AS_OF || '')} · 2022년 11월 ChatGPT 이후의 주요 모델만 담았어요.</p>`;
+    if (!list.length) {
+      return `
+        <p class="news-empty">타임라인에 정리된 이 기업의 모델이 아직 없어요. 반도체·인프라 기업처럼 자체 AI 모델을 내지 않는 곳도 있어요.</p>
+        <div class="rel-actions"><button type="button" class="link-btn" data-action="models-all">모델 타임라인 보기 →</button></div>
+        ${foot}`;
+    }
+    const item = (m) => `
+      <li class="dm-item">
+        <span class="dm-item__date">${fmtModelDate(m.date)}</span>
+        <span class="dm-item__body">
+          <span class="dm-item__head"><strong>${esc(m.name)}</strong><span class="kind-tag kind-${m.kind}"><span class="kind-dot" aria-hidden="true"></span>${esc(MODEL_KINDS[m.kind].label)}</span>${m.open ? '<span class="ml-flag">오픈 웨이트</span>' : ''}</span>
+          <span class="dm-item__desc">${esc(m.desc)}</span>
+        </span>
+      </li>`;
+    const more = list.length > DETAIL_MODELS_MAX ? `<p class="dm-more">이전 모델 ${list.length - DETAIL_MODELS_MAX}개는 타임라인에서 볼 수 있어요.</p>` : '';
+    return `
+      <div class="rel-actions"><button type="button" class="link-btn" data-action="models-company">타임라인에서 보기 →</button></div>
+      <section class="section">
+        <h3 class="section__title">최근 낸 모델 · ${list.length}</h3>
+        <ol class="dm-list">${list.slice(0, DETAIL_MODELS_MAX).map(item).join('')}</ol>
+        ${more}
+      </section>
       ${foot}`;
   }
 
@@ -1101,6 +1150,7 @@
   const PAGE_VIEWS = {
     board: { module: () => window.AIMapBoard, hash: 'board' },
     graph: { module: () => window.AIMapRelations, hash: 'relations' },
+    models: { module: () => window.AIMapModels, hash: 'models' },
   };
 
   function setView(next) {
@@ -1129,6 +1179,11 @@
   function openRelationsGraph(id) {
     setView('graph');
     window.AIMapRelations.focus(id);
+  }
+
+  function openModelTimeline(id) {
+    if (id) window.AIMapModels.focusCompany(id);
+    setView('models');
   }
 
   // One floating tooltip shared by the board's charts. `fill` builds its content with DOM
@@ -1194,6 +1249,7 @@
     // Search also narrows the board and highlights matches in the relations graph.
     window.AIMapBoard.setQuery(state.query);
     window.AIMapRelations.setQuery(state.query);
+    window.AIMapModels.setQuery(state.query);
     if (view !== 'map') return;
     if (state.sidebarMode !== 'companies') setSidebarMode('companies'); // results show in the company list
     applyFilters();
@@ -1233,6 +1289,10 @@
       showRelationsOnMap(byId.get(state.selectedId));
     } else if (target.dataset.action === 'rel-graph') {
       openRelationsGraph(state.selectedId);
+    } else if (target.dataset.action === 'models-company') {
+      openModelTimeline(state.selectedId);
+    } else if (target.dataset.action === 'models-all') {
+      openModelTimeline(null);
     } else if (target.dataset.action === 'retry-news') {
       loadNews(state.selectedId, state.newsLang, { force: true });
     } else if (target.dataset.tab) {

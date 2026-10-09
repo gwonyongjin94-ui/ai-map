@@ -111,13 +111,15 @@ const WATCH_ACTIONS = {
   run: () => {
     watch.run('manual');
   },
-  apply: (b) => watch.applyProposal(String(b.id), b.patch || null, b.relation || null),
+  apply: (b) => watch.applyProposal(String(b.id), b.patch || b.relation || b.model || null),
   dismiss: (b) => watch.dismissProposal(String(b.id)),
   'dismiss-signal': (b) => watch.dismissSignal(String(b.id)),
   edit: (b) => watch.editCompany(String(b.companyId), b.patch, { signalId: b.signalId && String(b.signalId) }),
   revert: (b) => watch.revert(String(b.companyId)),
   'add-relation': (b) => watch.addRelationManually(b.relation),
   'remove-relation': (b) => watch.removeRelation(String(b.id)),
+  'add-model': (b) => watch.addModelManually(b.model),
+  'remove-model': (b) => watch.removeModel(String(b.id)),
 };
 
 async function handleWatch(reqUrl, res, req) {

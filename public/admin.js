@@ -1,5 +1,6 @@
 // Data watch review page: see what changed, fix proposals up, apply or dismiss, revert.
-// Relation proposals (from deal news) add edges to the relations graph the same way.
+// Relation proposals (from deal news) add edges to the relations graph the same way, and model
+// proposals (from launch news) add entries to the model timeline.
 (() => {
   'use strict';
 
@@ -10,6 +11,7 @@
     quotes: '종목 상태 (Yahoo)',
     news: '뉴스 신호',
     relations: '관계 제안 (인수·합병 기사)',
+    models: '모델 제안 (출시 기사)',
     ai: 'Claude 검토',
   };
   const SOURCE_LABELS = { wikidata: 'Wikidata', yahoo: 'Yahoo Finance', news: '기사 제목', claude: 'Claude', manual: '직접 수정' };
@@ -190,6 +192,9 @@
     return `<ul class="evidence">${list.map((e) => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.label)} ↗</a></li>`).join('')}</ul>`;
   }
 
+  // Where an added relation or model came from; "manual" here is an addition, not an edit.
+  const originLabel = (origin) => (origin === 'manual' ? '직접 추가' : `${SOURCE_LABELS[origin] || esc(origin)} 제안`);
+
   // ───────── Relations ─────────
   const relTypes = () => (data && data.relationTypes) || window.AI_RELATION_TYPES || {};
 
@@ -297,6 +302,113 @@
       </article>`;
   }
 
+  // ───────── Models ─────────
+  const modelKinds = () => (data && data.modelKinds) || window.AI_MODEL_KINDS || {};
+
+  function kindTag(kind) {
+    const k = modelKinds()[kind];
+    return `<span class="kind-tag kind-${esc(kind)}"><span class="kind-dot" aria-hidden="true"></span>${esc(k ? k.label : kind)}</span>`;
+  }
+
+  function fmtModelDate(date) {
+    const [y, m, d] = date.split('-');
+    return d ? `${y}년 ${Number(m)}월 ${Number(d)}일` : `${y}년 ${Number(m)}월`;
+  }
+
+  function modelLine(m) {
+    return `${kindTag(m.kind)} <strong>${esc(m.name)}</strong>${m.open ? ' <span class="tag">오픈 웨이트</span>' : ''} <span class="muted">· ${fmtModelDate(m.date)}</span>`;
+  }
+
+  function modelFields(m, sources, { pickCompany = false } = {}) {
+    const kinds = Object.entries(modelKinds()).map(([k, v]) => `<option value="${esc(k)}"${k === m.kind ? ' selected' : ''}>${esc(v.label)}</option>`).join('');
+    const srcs = sources.map((s, i) => `<option value="${i}"${m.source && m.source.url === s.url ? ' selected' : ''}>${esc(s.title)}</option>`).join('');
+    const company = pickCompany
+      ? `<label class="field">기업<select name="company"><option value="">기업 선택</option>${companyOptions.map((c) => `<option value="${esc(c.id)}"${c.id === m.company ? ' selected' : ''}>${esc(c.nameKo)}</option>`).join('')}</select></label>`
+      : `<input type="hidden" name="company" value="${esc(m.company)}">`;
+    return `
+      ${company}
+      <div class="rel-pick rel-pick--meta">
+        <label class="field">모델 이름<input name="name" value="${esc(m.name)}" maxlength="60" placeholder="예: GPT-6.2"></label>
+        <label class="field">공개일<input name="date" value="${esc(m.date)}" placeholder="2026-10-07 또는 2026-10"></label>
+      </div>
+      <div class="rel-pick rel-pick--meta">
+        <label class="field">종류<select name="kind">${kinds}</select></label>
+        <label class="field field--check"><input type="checkbox" name="open"${m.open ? ' checked' : ''}> 가중치 공개 (오픈 웨이트)</label>
+      </div>
+      <label class="field">한 줄 설명 (타임라인에 표시)<textarea name="desc" rows="2" maxlength="200" placeholder="무엇이 새로운지 한 문장으로">${esc(m.desc)}</textarea></label>
+      <label class="field">출처 기사<select name="source"><option value="">없음</option>${srcs}</select></label>`;
+  }
+
+  function readModelForm(form, sources) {
+    const val = (name) => form.elements[name].value.trim();
+    const source = sources[val('source')];
+    return {
+      company: val('company'),
+      name: val('name'),
+      date: val('date'),
+      kind: val('kind'),
+      open: form.elements.open.checked,
+      desc: val('desc'),
+      source: source ? { title: source.title, url: source.url } : null,
+    };
+  }
+
+  const modelProposalSources = (p) => uniqueSources([p.model.source, ...(p.evidence || []).map(evidenceSource)]);
+
+  function modelProposalHTML(p) {
+    const c = record(p.model.company);
+    const current = p.current && p.current.length
+      ? p.current.map((m) => `<div>${kindTag(m.kind)} ${esc(m.name)} <span class="muted">· ${fmtModelDate(m.date)}</span></div>`).join('')
+      : '<span class="muted">타임라인에 이 기업의 모델이 아직 없어요</span>';
+    return `
+      <article class="card watch-card" data-proposal="${esc(p.id)}">
+        <header class="watch-card__head">
+          ${companyHead(c)}
+          <span class="pill-row">
+            <span class="tag tag--kind">${esc(p.title)}</span>
+            <span class="tag tag--${esc(p.confidence)}">${CONFIDENCE_LABELS[p.confidence] || ''}</span>
+            <span class="tag">${SOURCE_LABELS[p.source] || esc(p.source)}</span>
+          </span>
+        </header>
+        <p class="watch-card__summary">${esc(p.summary)}</p>
+        <table class="diff"><tbody>
+          <tr><th scope="row">최근 모델</th><td>${current}</td></tr>
+          <tr><th scope="row">제안</th><td class="is-new">
+            <div>${modelLine(p.model)}</div>
+            <div class="rel-proposal__detail">${esc(p.model.desc)}</div>
+          </td></tr>
+        </tbody></table>
+        ${evidenceHTML(p.evidence)}
+        <form class="watch-form" data-form="model-proposal">
+          <details><summary>반영하기 전에 고치기 (이름·날짜·종류·설명)</summary><div class="watch-form__fields">${modelFields(p.model, modelProposalSources(p))}</div></details>
+          <div class="watch-card__actions">
+            <button type="submit" class="btn btn--primary">타임라인에 추가</button>
+            <button type="button" class="btn" data-action="dismiss">무시</button>
+            <span class="muted">${fmtTime(p.createdAt)} 발견</span>
+          </div>
+        </form>
+      </article>`;
+  }
+
+  function addedModelsHTML() {
+    const list = data.addedModels || [];
+    if (!list.length) return '';
+    const items = list.map((m) => `
+      <li data-model="${esc(m.id)}">
+        <div class="added-rel">${companyChip(m.company)}<span>${modelLine(m)}</span></div>
+        <div class="rel-proposal__detail">${esc(m.desc)}${m.source ? ` <a class="muted-link" href="${esc(m.source.url)}" target="_blank" rel="noopener noreferrer">출처 ↗</a>` : ''}</div>
+        <div class="watch-card__actions">
+          <span class="muted">${fmtTime(m.addedAt)} · ${originLabel(m.origin)}</span>
+          <button type="button" class="btn" data-action="remove-model">타임라인에서 빼기</button>
+        </div>
+      </li>`).join('');
+    return `
+      <article class="card watch-card">
+        <header class="watch-card__head"><strong>추가한 모델</strong><span class="muted">models.js는 그대로 두고 overrides.js에 기록돼요</span></header>
+        <ul class="history">${items}</ul>
+      </article>`;
+  }
+
   function addedRelationsHTML() {
     const list = data.addedRelations || [];
     if (!list.length) return '';
@@ -305,7 +417,7 @@
         <div class="added-rel">${relationLine(r)}<span>${relTypeTag(r.type)} <strong>${esc(r.label)}</strong>${r.since ? ` <span class="muted">· ${esc(r.since)}</span>` : ''}</span></div>
         <div class="rel-proposal__detail">${esc(r.detail)}${r.source ? ` <a class="muted-link" href="${esc(r.source.url)}" target="_blank" rel="noopener noreferrer">출처 ↗</a>` : ''}</div>
         <div class="watch-card__actions">
-          <span class="muted">${fmtTime(r.addedAt)} · ${SOURCE_LABELS[r.origin] || esc(r.origin)}</span>
+          <span class="muted">${fmtTime(r.addedAt)} · ${originLabel(r.origin)}</span>
           <button type="button" class="btn" data-action="remove-relation">관계도에서 빼기</button>
         </div>
       </li>`).join('');
@@ -375,6 +487,13 @@
             <div class="watch-card__actions"><button type="submit" class="btn btn--primary">관계도에 추가</button></div>
           </details>
         </form>` : ''}
+        ${s.kind === 'launch' ? `
+        <form class="watch-form" data-form="add-model">
+          <details><summary>타임라인에 모델 직접 추가</summary>
+            <div class="watch-form__fields">${modelFields({ company: s.companyId, name: '', date: s.headlines && s.headlines.length ? new Date(Math.min(...s.headlines.map((h) => h.publishedAt))).toISOString().slice(0, 10) : '', kind: 'text', desc: '', source: null }, signalSources(s), { pickCompany: true })}</div>
+            <div class="watch-card__actions"><button type="submit" class="btn btn--primary">타임라인에 추가</button></div>
+          </details>
+        </form>` : ''}
         <form class="watch-form" data-form="edit" data-company="${esc(s.companyId)}">
           <details><summary>기업 정보 직접 고치기</summary>
             <div class="watch-form__fields">${formFields(editKeys, c, c)}</div>
@@ -410,19 +529,19 @@
     const tabs = [
       ['proposals', '변경 제안', data.proposals.length],
       ['signals', '살펴볼 신호', data.signals.length],
-      ['history', '반영 이력', data.overrides.length + (data.addedRelations || []).length],
+      ['history', '반영 이력', data.overrides.length + (data.addedRelations || []).length + (data.addedModels || []).length],
     ];
     let list = '';
     if (tab === 'proposals') {
       list = data.proposals.length
-        ? data.proposals.map((p) => (p.kind === 'relation' ? relationProposalHTML(p) : proposalHTML(p))).join('')
+        ? data.proposals.map((p) => (p.kind === 'relation' ? relationProposalHTML(p) : p.kind === 'model' ? modelProposalHTML(p) : proposalHTML(p))).join('')
         : `<p class="watch-empty">지금은 반영할 제안이 없어요.${data.signals.length ? ' 살펴볼 신호 탭도 확인해 보세요.' : ''}</p>`;
     } else if (tab === 'signals') {
       list = data.signals.length ? data.signals.map(signalHTML).join('') : '<p class="watch-empty">새 신호가 없어요.</p>';
     } else {
-      list = data.overrides.length || (data.addedRelations || []).length
-        ? addedRelationsHTML() + data.overrides.map(historyHTML).join('')
-        : '<p class="watch-empty">아직 반영한 변경이 없어요. 반영하면 companies.js·relations.js는 그대로 두고 data/overrides.js에 기록돼요.</p>';
+      list = data.overrides.length || (data.addedRelations || []).length || (data.addedModels || []).length
+        ? addedModelsHTML() + addedRelationsHTML() + data.overrides.map(historyHTML).join('')
+        : '<p class="watch-empty">아직 반영한 변경이 없어요. 반영하면 손으로 쓴 데이터 파일은 그대로 두고 data/overrides.js에 기록돼요.</p>';
     }
     root.innerHTML = `
       <div class="admin__inner">
@@ -463,6 +582,13 @@
         [form.elements.from.value, form.elements.to.value] = [form.elements.to.value, form.elements.from.value];
         break;
       }
+      case 'remove-model': {
+        const m = data.addedModels.find((x) => x.id === t.closest('[data-model]').dataset.model);
+        if (m && confirm(`${record(m.company).nameKo}의 ${m.name}을(를) 타임라인에서 뺄까요?`)) {
+          act('remove-model', { id: m.id }, '모델을 뺐어요. 타임라인을 새로고침하면 사라져요.');
+        }
+        break;
+      }
       case 'remove-relation': {
         const r = data.addedRelations.find((x) => x.id === t.closest('[data-relation]').dataset.relation);
         if (r && confirm(`${record(r.from).nameKo} → ${record(r.to).nameKo} (${r.label}) 관계를 관계도에서 뺄까요?`)) {
@@ -487,6 +613,13 @@
       const id = form.closest('[data-proposal]').dataset.proposal;
       const p = data.proposals.find((x) => x.id === id);
       act('apply', { id, relation: readRelationForm(form, proposalSources(p)) }, '관계도에 추가했어요. 관계도를 새로고침하면 보여요.');
+    } else if (form.dataset.form === 'model-proposal') {
+      const id = form.closest('[data-proposal]').dataset.proposal;
+      const p = data.proposals.find((x) => x.id === id);
+      act('apply', { id, model: readModelForm(form, modelProposalSources(p)) }, '타임라인에 추가했어요. 모델 화면을 새로고침하면 보여요.');
+    } else if (form.dataset.form === 'add-model') {
+      const s = data.signals.find((x) => x.id === form.closest('[data-signal]').dataset.signal);
+      act('add-model', { model: readModelForm(form, signalSources(s)) }, '타임라인에 추가했어요. 신호는 그대로 두니 다 봤으면 무시를 눌러 닫아 주세요.');
     } else if (form.dataset.form === 'add-relation') {
       const s = data.signals.find((x) => x.id === form.closest('[data-signal]').dataset.signal);
       act('add-relation', { relation: readRelationForm(form, signalSources(s)) }, '관계도에 추가했어요. 신호는 그대로 두니 다 봤으면 무시를 눌러 닫아 주세요.');
