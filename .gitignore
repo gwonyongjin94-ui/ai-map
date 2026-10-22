@@ -3,3 +3,5 @@ node_modules/
 .env
 # runtime state written by the server (watch results, cached briefing)
 /data/
+# downloaded by tools/datacenters/build.py
+/tools/datacenters/epoch/

@@ -43,7 +43,7 @@
     newsLang: storageGet(NEWS_LANG_KEY) === 'en' ? 'en' : 'ko',
     quotes: {},
     quotesStatus: 'idle', // idle | loading | ok | unavailable
-    sidebarMode: storageGet(SIDEBAR_MODE_KEY) === 'briefing' ? 'briefing' : 'companies',
+    sidebarMode: ['briefing', 'datacenters'].includes(storageGet(SIDEBAR_MODE_KEY)) ? storageGet(SIDEBAR_MODE_KEY) : 'companies',
     briefing: null, // last /api/briefing response
     selectedStoryId: null,
   };
@@ -64,6 +64,7 @@
     sidebarModes: document.getElementById('sidebarModes'),
     companyPane: document.getElementById('companyPane'),
     briefingPane: document.getElementById('briefingPane'),
+    dcPane: document.getElementById('dcPane'),
     briefingBadge: document.getElementById('briefingBadge'),
   };
 
@@ -681,6 +682,8 @@
             </ul>
           </section>
 
+          ${window.AIMapDatacenters.sectionHTML(c.id)}
+
           <section class="section">
             <h3 class="section__title">${stockTitle}</h3>
             ${stockHTML(c)}
@@ -950,7 +953,8 @@
   let overlayPoints = null; // [{ c, latlng (true position), marker, line }], main first
 
   // others: [{ c, linkClass }]
-  function showOverlay(kind, main, others) {
+  // `mainHTML` draws the main point when it isn't a company (a data center).
+  function showOverlay(kind, main, others, { mainHTML = null } = {}) {
     storyLayer.clearLayers();
     overlayKind = kind;
     // Unwrap longitudes around the main company so links take the short way (e.g. across the Pacific).
@@ -966,18 +970,21 @@
     }
     for (const p of points) {
       const { c } = p;
+      const custom = c === main && mainHTML;
       p.marker = L.marker(p.latlng, {
         pane: 'storyPane',
         title: c.name,
         zIndexOffset: c === main ? 1000 : 0, // the main company's pin and label stay on top
         icon: L.divIcon({
           className: 'pin-icon',
-          html: `<div class="story-pin"><div class="pin cat-${c.category}${c === main ? ' is-selected' : ''}">${logoHTML(c)}</div><span class="story-pin__label">${esc(c.name)}</span></div>`,
+          html: custom
+            ? `<div class="story-pin">${mainHTML}<span class="story-pin__label">${esc(c.label || c.name)}</span></div>`
+            : `<div class="story-pin"><div class="pin cat-${c.category}${c === main ? ' is-selected' : ''}">${logoHTML(c)}</div><span class="story-pin__label">${esc(c.name)}</span></div>`,
           iconSize: [40, 40],
           iconAnchor: [20, 20],
         }),
       });
-      p.marker.on('click', () => select(c.id));
+      if (!custom) p.marker.on('click', () => select(c.id));
       p.marker.addTo(storyLayer);
     }
     overlayPoints = points;
@@ -1121,6 +1128,10 @@
     storageSet(SIDEBAR_MODE_KEY, mode);
     els.companyPane.hidden = mode !== 'companies';
     els.briefingPane.hidden = mode !== 'briefing';
+    els.dcPane.hidden = mode !== 'datacenters';
+    // Company pins step back while the data center list is open.
+    map.getContainer().classList.toggle('is-dc-mode', mode === 'datacenters');
+    if (mode === 'datacenters') window.AIMapDatacenters.setVisible(true);
     for (const btn of els.sidebarModes.querySelectorAll('[data-mode]')) {
       btn.setAttribute('aria-pressed', String(btn.dataset.mode === mode));
     }
@@ -1140,7 +1151,8 @@
     const c = byId.get(id);
     if (!c) return;
     clearStory();
-    if (overlayKind === 'relations') clearOverlay();
+    if (overlayKind === 'relations' || overlayKind === 'datacenter') clearOverlay();
+    window.AIMapDatacenters.deselect();
     const prev = state.selectedId;
     state.selectedId = id;
 
@@ -1169,7 +1181,19 @@
     clearCompanySelection();
     clearStory();
     clearOverlay();
+    window.AIMapDatacenters.deselect();
     setHash(null);
+  }
+
+  // The detail panel for something that isn't a company (a data center).
+  function showPanel(html, className) {
+    clearCompanySelection();
+    clearStory();
+    els.detail.className = `detail ${className}`;
+    els.detail.innerHTML = html;
+    els.detail.hidden = false;
+    setHash(null);
+    setSidebarOpen(false);
   }
 
   function setHash(id) {
@@ -1335,8 +1359,10 @@
     window.AIMapModels.setQuery(state.query);
     window.AIMapReport.setQuery(state.query);
     window.AIMapWatchlist.setQuery(state.query);
+    window.AIMapDatacenters.setQuery(state.query);
     if (view !== 'map') return;
-    if (state.sidebarMode !== 'companies') setSidebarMode('companies'); // results show in the company list
+    // Results show in the company list — or the data center list when that's open.
+    if (state.sidebarMode === 'briefing') setSidebarMode('companies');
     applyFilters();
   });
 
@@ -1362,10 +1388,12 @@
   });
 
   els.detail.addEventListener('click', (e) => {
-    const target = e.target.closest('[data-action], [data-tab], [data-news-lang], [data-story], [data-company]');
+    const target = e.target.closest('[data-action], [data-tab], [data-news-lang], [data-story], [data-company], [data-dc]');
     if (!target) return;
     if (target.dataset.action === 'close') {
       closeDetail();
+    } else if (target.dataset.dc) {
+      window.AIMapDatacenters.open(target.dataset.dc);
     } else if (target.dataset.action === 'favorite') {
       toggleFavorite(state.selectedId);
     } else if (target.dataset.story) {
@@ -1437,6 +1465,21 @@
     ? ` (${new Date(window.AI_DATA_UPDATED_AT).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' })} 일부 갱신)`
     : '';
   els.dataFoot.textContent = `정보 기준 ${DATA_AS_OF}${updatedAt} · 기업 ${COMPANIES.length}곳 · 시세 Yahoo Finance`;
+  window.AIMapDatacenters.init({
+    map,
+    pane: els.dcPane,
+    esc,
+    logoHTML,
+    flag,
+    byId,
+    shortName,
+    showPanel,
+    showOverlay,
+    clearOverlay,
+    overlayKind: () => overlayKind,
+    isMobile: () => MOBILE_QUERY.matches,
+    detailWidth: () => els.detail.offsetWidth,
+  });
   setSidebarMode(state.sidebarMode);
   renderBriefingPane();
   applyFilters({ fit: true });

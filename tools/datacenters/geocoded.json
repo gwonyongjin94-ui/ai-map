@@ -1,0 +1,572 @@
+{
+ "Colossus 2": {
+  "q": "5420 Tulane Rd, Memphis, TN 38109, United States",
+  "lat": 34.9979829,
+  "lng": -90.0348674,
+  "display": "xAI Macrohard Colossus 2, 5420, Tulane Road, Scaife, Memphis, Shelby County, West Tennesse"
+ },
+ "Anthropic-Amazon New Carlisle": {
+  "q": "New Carlisle, IN 46552, United States",
+  "lat": 41.7056871,
+  "lng": -86.5098231,
+  "display": "New Carlisle, Saint Joseph County, Indiana, 46552, United States"
+ },
+ "Microsoft Fairwater Atlanta": {
+  "q": "1435 Hwy 54 W, Fayetteville, GA 30214, United States",
+  "lat": 33.4453541,
+  "lng": -84.5254819,
+  "display": "1435, Highway 54 West, Fayetteville, Fayette County, Georgia, 30214, United States"
+ },
+ "Google Pryor (North)": {
+  "q": "4581 Webb St, Pryor, OK 74361, United States",
+  "lat": 36.2411721,
+  "lng": -95.3300473,
+  "display": "4581, Webb Street, Mid-America Industrial Park, Lusta, Pryor Creek, Mayes County, Oklahoma"
+ },
+ "DayOne Nusajaya": {
+  "q": "Iskandar Puteri, Johor, Malaysia",
+  "lat": 1.4522711,
+  "lng": 103.6144729,
+  "display": "Iskandar Puteri, Johor Bahru, Johor, Malaysia"
+ },
+ "Meta Prometheus": {
+  "q": "New Albany, OH 43054, United States",
+  "lat": 40.0811745,
+  "lng": -82.8087864,
+  "display": "New Albany, Plain Township, Franklin County, Ohio, 43054, United States"
+ },
+ "OpenAI Stargate Abilene": {
+  "q": "5502 Spinks Rd, Abilene, TX 79601, United States",
+  "lat": 32.4942321,
+  "lng": -99.8009071,
+  "display": "Spinks Road, Abilene, Taylor County, Texas, 79603, United States"
+ },
+ "DayOne Kempas": {
+  "q": "Johor, Malaysia, Malaysia",
+  "lat": 1.3550319,
+  "lng": 103.6273961,
+  "display": "Malaysia–Singapore Second Link, Kampung Ladang, Iskandar Puteri, Johor Bahru, Johor, Malay"
+ },
+ "Microsoft Fairwater Wisconsin": {
+  "q": "4800 90th St, Mount Pleasant, WI 53403, United States",
+  "lat": 42.6748722,
+  "lng": -87.8948822,
+  "display": "4800, 90th Street, Mount Pleasant, Racine County, Wisconsin, 53403, United States"
+ },
+ "Google Columbus": {
+  "q": "5076 S High St, Columbus, OH 43207, United States",
+  "lat": 39.8614521,
+  "lng": -83.0039995,
+  "display": "5076, South High Street, Columbus, Franklin County, Ohio, 43137, United States"
+ },
+ "Google New Albany": {
+  "q": "1101 Beech Rd SW, New Albany, OH 43054, United States",
+  "lat": 40.070051,
+  "lng": -82.754042,
+  "display": "1101, Beech Road Southwest, New Albany, Jersey Township, Licking County, Ohio, 43054, Unit"
+ },
+ "Google Mesa": {
+  "q": "Mesa, Arizona, USA",
+  "lat": 33.4151005,
+  "lng": -111.831455,
+  "display": "Mesa, Maricopa County, Arizona, United States"
+ },
+ "Colossus 1": {
+  "q": "3231 Riverport Rd, Memphis, TN 38109, United States",
+  "lat": 35.0735511,
+  "lng": -90.0873144,
+  "display": "Riverport Road, Memphis, Shelby County, West Tennessee, Tennessee, 38109, United States"
+ },
+ "Google Council Bluffs (East)": {
+  "q": "10410 Bunge Ave, Council Bluffs, IA 51503, United States",
+  "lat": 41.1666499,
+  "lng": -95.7977408,
+  "display": "10410, Bunge Avenue, Council Bluffs, Lewis Township, Pottawattamie County, Iowa, 51503, Un"
+ },
+ "CoreWeave Denton TX": {
+  "q": "8171 Jim Christal Rd, Denton, TX 76207, United States",
+  "lat": 33.2192732,
+  "lng": -97.174715,
+  "display": "Jim Christal Road, Denton, Denton County, Texas, 76203, United States"
+ },
+ "QTS Richmond 1": {
+  "q": "6000 Technology Blvd, Sandston, VA 23150, United States",
+  "lat": 37.4888273,
+  "lng": -77.24749,
+  "display": "6000, Technology Boulevard, Sandston, Henrico County, Virginia, 23150, United States"
+ },
+ "Bridge Data Centres MY06": {
+  "q": "Sedenak Tech Park, Kulai, Johor, Malaysia",
+  "lat": 1.7000928,
+  "lng": 103.4143909,
+  "display": "Kulai Industrial Park, Kulai, Johor, Malaysia"
+ },
+ "Meta Rosemount": {
+  "q": "MN 55068, USA, United States",
+  "lat": 18.3388883,
+  "lng": -64.890137,
+  "display": "United States Postal Office - Tutu Mall, 4605, Tulu Park Mall Road, Anna's Retreat, Saint "
+ },
+ "Amazon Madison Mega Site": {
+  "q": "Canton, Mississippi, USA",
+  "lat": 32.612602,
+  "lng": -90.0367512,
+  "display": "Canton, Madison County, Mississippi, 39046, United States"
+ },
+ "Google Bristow": {
+  "q": "Bristow, VA 20136, United States",
+  "lat": 38.7311636,
+  "lng": -77.5480241,
+  "display": "Bristow, Prince William County, Virginia, 20136, United States"
+ },
+ "Microsoft Goodyear": {
+  "q": "14250 W Broadway Rd, Goodyear, AZ 85338, United States",
+  "lat": 33.4089905,
+  "lng": -112.3647996,
+  "display": "PHX-11, 14250, West Broadway Road, Goodyear, Maricopa County, Arizona, 85338, United State"
+ },
+ "Meta Jeffersonville": {
+  "q": "IN 47130, USA, United States",
+  "lat": 31.8912217,
+  "lng": -102.3469829,
+  "display": "Jack in the Box, 3911, East 42nd Street, Motor City USA Replat, Odessa, Ector County, Texa"
+ },
+ "Google Kansas City East": {
+  "q": "Kansas City, Missouri, USA",
+  "lat": 39.100105,
+  "lng": -94.5781416,
+  "display": "Kansas City, Jackson County, Missouri, United States"
+ },
+ "Meta Temple": {
+  "q": "2310 Eberhardt Rd, Temple, TX 76504, United States",
+  "lat": 31.1260165,
+  "lng": -97.3600001,
+  "display": "2310, Eberhardt Road, Temple, Bell County, Texas, 76504, United States"
+ },
+ "AWS New Albany": {
+  "q": "New Albany, Ohio, USA",
+  "lat": 40.0811745,
+  "lng": -82.8087864,
+  "display": "New Albany, Plain Township, Franklin County, Ohio, 43054, United States"
+ },
+ "Google Omaha": {
+  "q": "11110 State St, Omaha, NE 68142, United States",
+  "lat": 41.3356809,
+  "lng": -96.0523625,
+  "display": "State Street, Omaha, Union Precinct, Douglas County, Nebraska, 68007, United States"
+ },
+ "Google Lincoln": {
+  "q": "5475 Cloud Ct, Lincoln, NE 68514, United States",
+  "lat": 40.907472,
+  "lng": -96.6457832,
+  "display": "Cloud Court, Lincoln, Lancaster County, Nebraska, 68514, United States"
+ },
+ "QTS Richmond 2": {
+  "q": "Sandston, VA 23150, United States",
+  "lat": 37.5234794,
+  "lng": -77.3158118,
+  "display": "Sandston, Henrico County, Virginia, 23250, United States"
+ },
+ "Google The Dalles": {
+  "q": "3500 River Rd, The Dalles, OR, United States",
+  "lat": 45.6253889,
+  "lng": -121.2023887,
+  "display": "River Road, The Dalles, Wasco County, Oregon, 97058, United States"
+ },
+ "QTS Richmond 3": {
+  "q": "Sandston, VA 23150, United States",
+  "lat": 37.5234794,
+  "lng": -77.3158118,
+  "display": "Sandston, Henrico County, Virginia, 23250, United States"
+ },
+ "Meta Montgomery": {
+  "q": "Montgomery, Alabama, USA",
+  "lat": 32.3777111,
+  "lng": -86.3090775,
+  "display": "Montgomery, Montgomery County, Alabama, United States"
+ },
+ "Meta Kuna": {
+  "q": null,
+  "lat": null,
+  "lng": null,
+  "display": null
+ },
+ "Meta Cheyenne": {
+  "q": "Cheyenne, Wyoming, USA",
+  "lat": 41.139981,
+  "lng": -104.820246,
+  "display": "Cheyenne, Laramie County, Wyoming, United States"
+ },
+ "Amazon Ridgeland": {
+  "q": "1626 County Line Road Ridgeland, Mississippi, United States",
+  "lat": 32.4000327,
+  "lng": -90.1971708,
+  "display": "1626, West County Line Road, Lakeover, Jackson, Hinds County, Mississippi, 39213, United S"
+ },
+ "Meta Huntsville": {
+  "q": "Huntsville, Alabama, USA",
+  "lat": 34.729847,
+  "lng": -86.5859011,
+  "display": "Huntsville, Madison County, Alabama, United States"
+ },
+ "Coreweave Helios": {
+  "q": "Afton, TX 79220, United States",
+  "lat": 33.7628599,
+  "lng": -100.8168001,
+  "display": "Afton, Dickens County, Texas, 79220, United States"
+ },
+ "Microsoft Project Osmium": {
+  "q": "Cumming, IA 50061, United States",
+  "lat": 41.4833235,
+  "lng": -93.7624442,
+  "display": "Cumming, Linn Township, Warren County, Iowa, United States"
+ },
+ "Meta Eagle Mountain": {
+  "q": "Eagle Mountain, UT 84005, United States",
+  "lat": 40.3093488,
+  "lng": -112.0119825,
+  "display": "Eagle Mountain, Utah County, Utah, 84005, United States"
+ },
+ "Google Midlothian": {
+  "q": "3250 Railport Parkway, Midlothian, TX 76065, United States",
+  "lat": 32.438927,
+  "lng": -97.0507991,
+  "display": "Railport Parkway, Midlothian, Ellis County, Texas, 76084, United States"
+ },
+ "Google Storey County": {
+  "q": "McCarran, Storey County, Nevada, USA",
+  "lat": 39.5539417,
+  "lng": -119.4897585,
+  "display": "Studio 6 Mccarran, NV - Sparks - Tahoe - Reno Industrial Center, 795, USA Parkway, Tahoe R"
+ },
+ "Google Lancaster": {
+  "q": "105 Whiley Rd, Lancaster, OH 43130, United States",
+  "lat": 39.7270407,
+  "lng": -82.6831433,
+  "display": "105, Whiley Road Southwest, Lancaster, Hocking Township, Fairfield County, Ohio, 43130, Un"
+ },
+ "Meta-QTS Hillsboro 2": {
+  "q": "4755 NE Huffman St, Hillsboro, OR 97124, United States",
+  "lat": 45.5588758,
+  "lng": -122.9296051,
+  "display": "QTS Data Center - Hillsboro 2, 4755, Northeast Huffman Street, North Hillsboro, Hillsboro,"
+ },
+ "Google Waltham Cross": {
+  "q": "Waltham Cross, United Kingdom",
+  "lat": 51.6857829,
+  "lng": -0.0330001,
+  "display": "Waltham Cross, Broxbourne, Hertfordshire, England, EN8 7AN, United Kingdom"
+ },
+ "VNET Bayin Ulanqab": {
+  "q": "Ulanqab, Inner Mongolia, China",
+  "lat": 40.9902685,
+  "lng": 113.1315646,
+  "display": "Ulanqab City, Inner Mongolia, 012000, China"
+ },
+ "Google Arcola": {
+  "q": "Sterling, VA 20166, United States",
+  "lat": 39.0017455,
+  "lng": -77.4033349,
+  "display": "Sterling, Loudoun County, Virginia, 20164, United States"
+ },
+ "Google Red Oak": {
+  "q": "330 Austin Blvd, Red Oak, TX 75154, United States",
+  "lat": 32.5376266,
+  "lng": -96.7966747,
+  "display": "330, North Austin Boulevard, Red Oak, Ellis County, Texas, 75154, United States"
+ },
+ "Google Papillion": {
+  "q": null,
+  "lat": null,
+  "lng": null,
+  "display": null
+ },
+ "Meta Gallatin": {
+  "q": "Gallatin, TN 37066, United States",
+  "lat": 36.3883031,
+  "lng": -86.4475898,
+  "display": "Gallatin, Sumner County, Middle Tennessee, Tennessee, 37066, United States"
+ },
+ "Meta Los Lunas": {
+  "q": "4250 Messenger Lp, Los Lunas, NM 87031, United States",
+  "lat": 34.8301645,
+  "lng": -106.7838267,
+  "display": "Meta, 4250, Messenger Loop Northwest, Meta Los Lunas Data Center, Los Lunas, Valencia Coun"
+ },
+ "CoreWeave Ellendale ND": {
+  "q": "9685 87th Ave SE, Ellendale, ND 58436, United States",
+  "lat": 46.0102576,
+  "lng": -98.5686907,
+  "display": "87th Avenue Southeast, Ellendale Township, Dickey County, North Dakota, 58436, United Stat"
+ },
+ "Meta Sarpy": {
+  "q": null,
+  "lat": null,
+  "lng": null,
+  "display": null
+ },
+ "Huawei Horinger": {
+  "q": "Horinger County, Inner Mongolia, China",
+  "lat": 40.2952478,
+  "lng": 111.9044975,
+  "display": "Horinger County, Hohhot City, Inner Mongolia, 011500, China"
+ },
+ "CoreWeave Chester VA": {
+  "q": "Chester, VA, United States",
+  "lat": 37.3489475,
+  "lng": -77.438379,
+  "display": "Chester, Chesterfield County, Virginia, 23831, United States"
+ },
+ "Oracle Batam": {
+  "q": "Batam, Indonesia",
+  "lat": 1.1030815,
+  "lng": 104.0383696,
+  "display": "Batam, Riau Islands, Indonesia"
+ },
+ "AWS Berwick": {
+  "q": "1125 Electron Ave, Berwick, PA 18603, United States",
+  "lat": 41.0838485,
+  "lng": -76.1435333,
+  "display": "Amazon AWS PHL, 1125, Electron Avenue, Berwick, Luzerne County, Pennsylvania, 18603, Unite"
+ },
+ "CoreWeave Marble NC": {
+  "q": "155 Palmer Ln, Marble, NC 28905, United States",
+  "lat": 35.1849883,
+  "lng": -83.9141225,
+  "display": "155, Palmer Lane, Marble, Cherokee County, North Carolina, 28905, United States"
+ },
+ "Meta Aiken": {
+  "q": null,
+  "lat": null,
+  "lng": null,
+  "display": null
+ },
+ "Huawei Wuhu": {
+  "q": "Wuhu, Anhui, China",
+  "lat": 31.1800568,
+  "lng": 118.2141777,
+  "display": "Wuhu, Anhui, China"
+ },
+ "Core42 Lake Mariner": {
+  "q": "7725 Lake Rd, Barker, NY 14012, United States",
+  "lat": 43.3586546,
+  "lng": -78.604128,
+  "display": "7725, Lake Road, Town of Somerset, Niagara County, New York, 14012, United States"
+ },
+ "Microsoft SAT40": {
+  "q": "San Antonio, TX 78245, United States",
+  "lat": 29.4246002,
+  "lng": -98.4951405,
+  "display": "San Antonio, Bexar County, Texas, United States"
+ },
+ "STACK Infrastructure NVA02": {
+  "q": "9590 Hornbaker Rd, Manassas, VA 20109, United States",
+  "lat": 38.7458055,
+  "lng": -77.5377246,
+  "display": "STACK, 9590, Hornbaker Road, Manassas, Prince William County, Virginia, 20109, United Stat"
+ },
+ "Anthropic Lake Mariner": {
+  "q": "7725 Lake Rd, Barker, NY 14012, United States",
+  "lat": 43.3586546,
+  "lng": -78.604128,
+  "display": "7725, Lake Road, Town of Somerset, Niagara County, New York, 14012, United States"
+ },
+ "Microsoft-Nebius New Jersey": {
+  "q": "3963 S Lincoln Ave, Vineland, New Jersey, United States",
+  "lat": 39.4281986,
+  "lng": -75.0184088,
+  "display": "3963, South Lincoln Avenue, Clayville, Vineland, Cumberland County, New Jersey, 08361, Uni"
+ },
+ "CoreWeave Norway": {
+  "q": "Øvrebø, Norway",
+  "lat": 58.2929891,
+  "lng": 7.7879267,
+  "display": "Øvrebø, Vennesla, Agder, 4715, Norway"
+ },
+ "Nebius Mantsala": {
+  "q": "Mäntsälä, Finland",
+  "lat": 60.6353444,
+  "lng": 25.3159266,
+  "display": "Mäntsälä, Helsinki sub-region, Uusimaa, Mainland Finland, Finland"
+ },
+ "Southgate Melbourne": {
+  "q": "Melbourne, Victoria, Australia",
+  "lat": -37.8142454,
+  "lng": 144.9631732,
+  "display": "Melbourne, Victoria, Australia"
+ },
+ "Stream Phoenix": {
+  "q": "Goodyear, Arizona, USA",
+  "lat": 33.4672279,
+  "lng": -112.3853489,
+  "display": "Goodyear, Maricopa County, Arizona, United States"
+ },
+ "Microsoft SAT14": {
+  "q": "3545 Wiseman Boulevard, San Antonio, TX 78251, United States",
+  "lat": 29.4732074,
+  "lng": -98.6814588,
+  "display": "3545, Wiseman Boulevard, Westover Hills, San Antonio, Bexar County, Texas, 78251, United S"
+ },
+ "Vantage TX1": {
+  "q": "14720 Omicron Dr, San Antonio, TX 78245, United States",
+  "lat": 29.4168571,
+  "lng": -98.7901875,
+  "display": "Vantage TX11, 14720, Omicron Drive, San Antonio, Bexar County, Texas, 78245, United States"
+ },
+ "CoreWeave Dalton 1 & 2": {
+  "q": "2205 Industrial South Rd, Dalton, GA, 30721, United States",
+  "lat": 34.7134428,
+  "lng": -84.9521507,
+  "display": "2205, Industrial South Road, Dalton, Whitfield County, Georgia, 30721, United States"
+ },
+ "Alibaba Zhangbei": {
+  "q": "Zhangbei County, Hebei, China",
+  "lat": 41.287775,
+  "lng": 114.769295,
+  "display": "Zhangbei County, Zhangjiakou, Hebei, China"
+ },
+ "Start Campus Sines Data Campus": {
+  "q": "Sines, Portugal",
+  "lat": 37.956549,
+  "lng": -8.8689639,
+  "display": "Sines, Setúbal, Portugal"
+ },
+ "xAI QTS Atlanta": {
+  "q": "1025 Jefferson Street NW, Atlanta, GA 30318, United States",
+  "lat": 33.7771892,
+  "lng": -84.4195499,
+  "display": "QTS Atlanta Data Center 2, 1025, Jefferson Street Northwest, Bellwood, Bankhead, Atlanta, "
+ },
+ "Nscale Keflavik": {
+  "q": "Reykjanesbær, Iceland",
+  "lat": 63.9832697,
+  "lng": -22.5561494,
+  "display": "Reykjanesbær, Southern Peninsula, Iceland"
+ },
+ "Anthropic Barber Lake": {
+  "q": "Colorado City, Texas, USA",
+  "lat": 32.3930337,
+  "lng": -100.86351,
+  "display": "Colorado City, Mitchell County, Texas, 79512, United States"
+ },
+ "CoreWeave Lancaster Greenfield site": {
+  "q": "216 Greenfield Rd, Lancaster, PA, United States",
+  "lat": 40.048747,
+  "lng": -76.256144,
+  "display": "216, Greenfield Road, East Lampeter Township, Lancaster County, Pennsylvania, 17601, Unite"
+ },
+ "CoreWeave Muskogee OK": {
+  "q": null,
+  "lat": null,
+  "lng": null,
+  "display": null
+ },
+ "Crusoe Abilene Expansion": {
+  "q": "5502 Spinks Rd, Abilene, TX 79601, United States",
+  "lat": 32.4942321,
+  "lng": -99.8009071,
+  "display": "Spinks Road, Abilene, Taylor County, Texas, 79603, United States"
+ },
+ "EcoDataCenter 2": {
+  "q": "Borlänge, Sweden",
+  "lat": 60.4856426,
+  "lng": 15.4234561,
+  "display": "Borlänge, Borlänge kommun, Dalarna County, 784 31, Sweden"
+ },
+ "Envision Galaxy Ulanqab": {
+  "q": "Ulanqab, Inner Mongolia, China",
+  "lat": 40.9902685,
+  "lng": 113.1315646,
+  "display": "Ulanqab City, Inner Mongolia, 012000, China"
+ },
+ "Goodnight": {
+  "q": "Claude, Texas, USA",
+  "lat": 35.1081103,
+  "lng": -101.362741,
+  "display": "Claude, Armstrong County, Texas, United States"
+ },
+ "Google Cedar Rapids": {
+  "q": "5800 EDGEWOOD RD SW CEDAR RAPIDS, IA 52404, United States",
+  "lat": 41.9221755,
+  "lng": -91.7156674,
+  "display": "5800, Edgewood Road Southwest, Cedar Rapids, Fairfax Township, Linn County, Iowa, 52404, U"
+ },
+ "Google Fort Wayne": {
+  "q": "6015 Adams Center Road, Fort Wayne, IN 46806, United States",
+  "lat": 41.0309293,
+  "lng": -85.0536261,
+  "display": "6015, Adams Center Road, Fort Wayne, Allen County, Indiana, 46816, United States"
+ },
+ "Meta Bowling Green": {
+  "q": "Bowling Green, OH 43402, United States",
+  "lat": 41.3747744,
+  "lng": -83.6513229,
+  "display": "Bowling Green, Wood County, Ohio, United States"
+ },
+ "Meta Hyperion": {
+  "q": "Holly Ridge, Louisiana, USA",
+  "lat": 32.4676421,
+  "lng": -91.6267883,
+  "display": "Holly Ridge, Richland Parish, Louisiana, United States"
+ },
+ "Microsoft Narvik Norway": {
+  "q": "Narvik, Norway",
+  "lat": 68.4383796,
+  "lng": 17.4271978,
+  "display": "Narvik, Nordland, 8517, Norway"
+ },
+ "OpenAI Stargate Lordstown": {
+  "q": "Warren, OH 44481, United States",
+  "lat": 41.2367955,
+  "lng": -80.8190423,
+  "display": "Warren, Trumbull County, Ohio, United States"
+ },
+ "OpenAI Stargate Michigan": {
+  "q": "Saline Township, Washtenaw County, Michigan, USA",
+  "lat": 42.1245153,
+  "lng": -83.8385743,
+  "display": "Saline Township, Washtenaw County, Michigan, United States"
+ },
+ "OpenAI Stargate Milam": {
+  "q": "Milam County, Texas, USA",
+  "lat": 30.7626867,
+  "lng": -96.9981706,
+  "display": "Milam County, Texas, United States"
+ },
+ "OpenAI Stargate New Mexico": {
+  "q": "Santa Teresa, New Mexico, USA",
+  "lat": 31.8700346,
+  "lng": -106.6865799,
+  "display": "Santa Teresa, Doña Ana County, New Mexico, United States"
+ },
+ "OpenAI Stargate Shackelford": {
+  "q": "Shackelford County, Texas, USA",
+  "lat": 32.7088752,
+  "lng": -99.3307616,
+  "display": "Shackelford County, Texas, United States"
+ },
+ "OpenAI Stargate UAE": {
+  "q": "Abu Dhabi, United Arab Emirates",
+  "lat": 24.4538352,
+  "lng": 54.3774014,
+  "display": "Abu Dhabi, Abu Dhabi Emirate, United Arab Emirates"
+ },
+ "OpenAI Stargate Wisconsin": {
+  "q": "Port Washington, Wisconsin, USA",
+  "lat": 43.3885538,
+  "lng": -87.8692845,
+  "display": "Port Washington, Ozaukee County, Wisconsin, 53074, United States"
+ },
+ "QTS Cedar Rapids": {
+  "q": "6200 76th Ave SW, Fairfax, IA 52228, United States",
+  "lat": 41.9056197,
+  "lng": -91.7509874,
+  "display": "6200, 76th Avenue Southwest, Cedar Rapids, Fairfax Township, Linn County, Iowa, 52228, Uni"
+ },
+ "QTS Eagle Mountain": {
+  "q": "652 E Hyperscale Way, Eagle Mountain, UT 84013, United States",
+  "lat": 40.2688855,
+  "lng": -112.0342942,
+  "display": "Hyperscale Way, Eagle Mountain, Utah County, Utah, 84005, United States"
+ }
+}
