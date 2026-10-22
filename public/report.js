@@ -17,6 +17,7 @@
     loading: false,
     error: null,
     query: '',
+    favOnly: false, // stories and models of starred companies only
   };
 
   let A = null; // window.AIMap
@@ -78,6 +79,8 @@
     return [s.title, s.summary, s.topic, ...names].some((t) => t.toLowerCase().includes(q));
   }
 
+  const starred = (ids) => !state.favOnly || ids.some((id) => A.favorites.has(id));
+
   function weekModels(w) {
     return (window.AI_MODELS || [])
       .filter((m) => A.byId.has(m.company) && m.date.length === 10 && m.date >= w.start && m.date <= w.end)
@@ -104,8 +107,9 @@
     const d = state.data;
     const w = d.week;
     const stories = d.stories;
-    const shown = stories.filter(matchesQuery);
+    const shown = stories.filter((s) => matchesQuery(s) && starred(s.companyIds));
     const models = weekModels(w);
+    const shownModels = models.filter((m) => starred([m.company]));
     const idx = d.weeks.findIndex((x) => x.id === w.id);
     const older = d.weeks[idx + 1];
     const newer = idx > 0 ? d.weeks[idx - 1] : null;
@@ -123,6 +127,7 @@
           </select>
           <button type="button" class="btn rp-nav__btn" data-week="${newer ? esc(newer.id) : ''}" ${newer ? '' : 'disabled'} aria-label="다음 주">→</button>
           <span class="rp-nav__label" data-ref="weekLabel">${w.year}년 ${w.week}주차${w.isCurrent ? ' · 진행 중' : ''}</span>
+          <label class="switch rp-nav__fav"><input type="checkbox" data-ref="favOnly"${state.favOnly ? ' checked' : ''}><span class="switch__track" aria-hidden="true"></span>관심 기업만</label>
         </div>
         ${statsHTML(stories, models)}
         ${recapHTML(d)}
@@ -138,16 +143,16 @@
         </div>
         <section class="card">
           <div class="card__head">
-            <div><h2 class="card__title">이번 주 나온 모델 ${models.length ? `<span class="rp-count">${models.length}</span>` : ''}</h2><p class="card__desc">모델 타임라인에서 출시일이 이 주인 모델</p></div>
+            <div><h2 class="card__title">이번 주 나온 모델 ${shownModels.length ? `<span class="rp-count">${shownModels.length}</span>` : ''}</h2><p class="card__desc">모델 타임라인에서 출시일이 이 주인 모델</p></div>
             <a class="link-btn" href="#models">모델 타임라인 →</a>
           </div>
-          ${modelsHTML(models)}
+          ${modelsHTML(shownModels)}
         </section>
         <section class="card">
           <div class="card__head">
             <div>
               <h2 class="card__title">날짜별 이슈</h2>
-              <p class="card__desc">${state.query ? `검색어에 맞는 이슈 ${shown.length}개 / ${stories.length}개` : '이슈는 가장 이른 기사 날짜에 놓여요 · 같은 이슈가 여러 번 브리핑되면 하나로 합쳐 최신 요약을 보여 줘요'}</p>
+              <p class="card__desc">${state.query || state.favOnly ? `고른 조건에 맞는 이슈 ${shown.length}개 / ${stories.length}개` : '이슈는 가장 이른 기사 날짜에 놓여요 · 같은 이슈가 여러 번 브리핑되면 하나로 합쳐 최신 요약을 보여 줘요'}</p>
             </div>
           </div>
           ${daysHTML(shown, d)}
@@ -293,7 +298,9 @@
 
   function daysHTML(stories, d) {
     if (!stories.length) {
-      if (state.query) return '<p class="rp-empty">검색어에 맞는 이슈가 없어요.</p>';
+      if (state.query || (state.favOnly && stories.length === 0 && d.stories.length)) {
+        return `<p class="rp-empty">${state.favOnly && !A.favorites.list().length ? '아직 관심 기업이 없어요. 기업에 별표(☆)를 달아 보세요.' : '고른 조건에 맞는 이슈가 없어요.'}</p>`;
+      }
       const first = d.firstDate
         ? `보관된 이슈는 ${fmtDay(d.firstDate)}부터 있어요.`
         : d.sample
@@ -325,6 +332,13 @@
     });
     els.root.addEventListener('change', (e) => {
       if (e.target === els.weekSelect) load(els.weekSelect.value);
+      else if (e.target === els.favOnly) {
+        state.favOnly = els.favOnly.checked;
+        render();
+      }
+    });
+    window.addEventListener('aimap:favorites', () => {
+      if (state.favOnly && state.data && !els.root.hidden) render();
     });
   }
 

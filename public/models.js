@@ -17,6 +17,7 @@
     kinds: new Set(KIND_KEYS),
     openOnly: false,
     majorOnly: false,
+    favOnly: false, // starred companies only
     company: '', // '' = every company
     query: '',
   };
@@ -67,6 +68,7 @@
         state.kinds.has(m.kind) &&
         (!state.openOnly || m.open) &&
         (!state.majorOnly || m.major) &&
+        (!state.favOnly || A.favorites.has(m.company)) &&
         (!state.company || m.company === state.company) &&
         matchesQuery(m)
     );
@@ -97,6 +99,7 @@
           </div>
           <label class="switch"><input type="checkbox" data-ref="openOnly"><span class="switch__track" aria-hidden="true"></span>오픈 웨이트만</label>
           <label class="switch"><input type="checkbox" data-ref="majorOnly"><span class="switch__track" aria-hidden="true"></span>주요 출시만</label>
+          <label class="switch"><input type="checkbox" data-ref="favOnly"><span class="switch__track" aria-hidden="true"></span>관심 기업만</label>
           <select class="ml-select" data-ref="company" aria-label="기업 고르기"><option value="">모든 기업</option>${companyOpts}</select>
         </div>
         <div class="stat-row" data-ref="stats"></div>
@@ -311,7 +314,9 @@
     const company = state.company && A.byId.get(state.company);
     els.listTitle.textContent = company ? `${A.shortName(company)}의 모델 ${list.length}개` : `모델 목록 ${list.length}개`;
     if (!list.length) {
-      els.list.innerHTML = '<p class="chart-empty">조건에 맞는 모델이 없어요. 필터를 바꾸거나 검색어를 지워 보세요.</p>';
+      els.list.innerHTML = state.favOnly && !A.favorites.list().length
+        ? '<p class="chart-empty">아직 관심 기업이 없어요. 기업에 별표(☆)를 달면 그 기업 모델만 골라 볼 수 있어요.</p>'
+        : '<p class="chart-empty">조건에 맞는 모델이 없어요. 필터를 바꾸거나 검색어를 지워 보세요.</p>';
       return;
     }
     const years = new Map();
@@ -340,6 +345,7 @@
     for (const b of els.kinds.querySelectorAll('[data-kind]')) b.setAttribute('aria-pressed', String(state.kinds.has(b.dataset.kind)));
     els.openOnly.checked = state.openOnly;
     els.majorOnly.checked = state.majorOnly;
+    els.favOnly.checked = state.favOnly;
     els.company.value = state.company;
   }
 
@@ -377,6 +383,7 @@
     els.root.addEventListener('change', (e) => {
       if (e.target === els.openOnly) state.openOnly = els.openOnly.checked;
       else if (e.target === els.majorOnly) state.majorOnly = els.majorOnly.checked;
+      else if (e.target === els.favOnly) state.favOnly = els.favOnly.checked;
       else if (e.target === els.company) state.company = els.company.value;
       else return;
       render();
@@ -401,6 +408,9 @@
       if (els.root.hidden) return;
       cancelAnimationFrame(resizeFrame);
       resizeFrame = requestAnimationFrame(() => renderChart(filtered()));
+    });
+    window.addEventListener('aimap:favorites', () => {
+      if (state.favOnly && !els.root.hidden) render();
     });
   }
 
@@ -438,6 +448,7 @@
       KIND_KEYS.forEach((k) => state.kinds.add(k));
       state.openOnly = false;
       state.majorOnly = false;
+      state.favOnly = false;
       syncControls();
       if (els.root.hidden) {
         scrollToTop = true;

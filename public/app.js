@@ -26,6 +26,7 @@
   const THEME_KEY = 'aimap-theme';
   const NEWS_LANG_KEY = 'aimap-news-lang';
   const SIDEBAR_MODE_KEY = 'aimap-sidebar-mode';
+  const FAVORITES_KEY = 'aimap-favorites';
   const BRIEFING_POLL_MS = 8 * 1000; // while Claude is writing a briefing
   const BRIEFING_REFRESH_MS = 15 * 60 * 1000;
   const STORY_ZOOM_MAX = 5;
@@ -82,6 +83,57 @@
     return MODELS.filter((m) => m.company === id).sort((a, b) => b.date.localeCompare(a.date));
   }
   const allSymbols = [...new Set(COMPANIES.flatMap((c) => c.listings.map((l) => l.symbol)))];
+
+  // ───────── Favorites ─────────
+  // Starred companies, in the order they were starred. Kept in this browser only.
+  function readFavorites() {
+    try {
+      const ids = JSON.parse(storageGet(FAVORITES_KEY) || '[]');
+      return Array.isArray(ids) ? ids.filter((id) => byId.has(id)) : [];
+    } catch {
+      return [];
+    }
+  }
+  let favorites = new Set(readFavorites());
+
+  function toggleFavorite(id) {
+    if (!byId.has(id)) return;
+    if (favorites.has(id)) favorites.delete(id);
+    else favorites.add(id);
+    storageSet(FAVORITES_KEY, JSON.stringify([...favorites]));
+    onFavoritesChanged();
+  }
+
+  // Every view that marks or filters by favorites listens for 'aimap:favorites'.
+  function onFavoritesChanged() {
+    const filtering = state.category === 'favorites';
+    if (filtering && !favorites.size) state.category = 'all';
+    // Re-adding markers would collapse a spiderfied cluster around the open company, so the
+    // map is only rebuilt when the favorites filter decides which pins show.
+    if (filtering) applyFilters();
+    else {
+      renderChips();
+      renderList();
+    }
+    for (const id of markers.keys()) syncMarkerDecor(id);
+    if (!filtering) cluster.refreshClusters();
+    renderBriefingPane();
+    const btn = els.detail.querySelector('[data-action="favorite"]');
+    if (btn) syncFavoriteButton(btn, state.selectedId);
+    window.dispatchEvent(new CustomEvent('aimap:favorites'));
+  }
+
+  const STAR_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="star-path" d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.7l-5.4 3 1.2-6-4.5-4.2 6.1-.7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+
+  function favoriteLabel(id) {
+    return favorites.has(id) ? '관심 기업에서 빼기' : '관심 기업에 추가';
+  }
+
+  function syncFavoriteButton(btn, id) {
+    btn.setAttribute('aria-pressed', String(favorites.has(id)));
+    btn.setAttribute('aria-label', favoriteLabel(id));
+    btn.title = favoriteLabel(id);
+  }
 
   // ───────── Utilities ─────────
   function esc(value) {
@@ -229,10 +281,12 @@
     maxClusterRadius: 44,
     spiderfyDistanceMultiplier: 1.7,
     iconCreateFunction: (group) => {
-      const inBriefing = group.getAllChildMarkers().some((m) => storyCompanyIds().has(m.options.companyId));
+      const children = group.getAllChildMarkers();
+      const inBriefing = children.some((m) => storyCompanyIds().has(m.options.companyId));
+      const starred = children.some((m) => favorites.has(m.options.companyId));
       return L.divIcon({
         className: 'pin-icon',
-        html: `<div class="cluster${inBriefing ? ' has-story' : ''}">${group.getChildCount()}</div>`,
+        html: `<div class="cluster${inBriefing ? ' has-story' : ''}${starred ? ' is-favorite' : ''}">${group.getChildCount()}</div>`,
         iconSize: [44, 44],
       });
     },
@@ -266,6 +320,7 @@
     const pin = el.querySelector('.pin');
     pin.classList.toggle('is-selected', id === state.selectedId);
     pin.classList.toggle('has-story', storyCompanyIds().has(id));
+    pin.classList.toggle('is-favorite', favorites.has(id));
   }
 
   // Where a selected company should sit on screen so the detail panel
@@ -309,7 +364,9 @@
 
   // ───────── Filtering & list ─────────
   function matchesFilters(c, { ignoreCategory = false } = {}) {
-    if (!ignoreCategory && state.category !== 'all' && c.category !== state.category) return false;
+    if (!ignoreCategory && state.category === 'favorites') {
+      if (!favorites.has(c.id)) return false;
+    } else if (!ignoreCategory && state.category !== 'all' && c.category !== state.category) return false;
     if (state.listedOnly && !isListed(c)) return false;
     if (state.query && !searchIndex.get(c.id).includes(state.query)) return false;
     return true;
@@ -327,7 +384,7 @@
       const count = cat.id === 'all' ? base.length : base.filter((c) => c.category === cat.id).length;
       const dot = cat.id === 'all' ? '' : `<span class="chip__dot" style="--dot: var(--cat-${cat.id})"></span>`;
       return `<button type="button" class="chip" data-category="${cat.id}" aria-pressed="${state.category === cat.id}">${dot}${cat.label}<span class="chip__count">${count}</span></button>`;
-    }).join('');
+    }).join('') + `<button type="button" class="chip" data-category="favorites" aria-pressed="${state.category === 'favorites'}"><span class="fav-mark" aria-hidden="true">★</span>관심<span class="chip__count">${base.filter((c) => favorites.has(c.id)).length}</span></button>`;
   }
 
   function listQuoteHTML(c) {
@@ -344,7 +401,9 @@
     els.listMeta.textContent = `${items.length}개 기업 · 상장 ${listedCount}`;
 
     if (!items.length) {
-      els.list.innerHTML = '<li class="empty">조건에 맞는 기업이 없어요.</li>';
+      els.list.innerHTML = state.category === 'favorites' && !favorites.size
+        ? '<li class="empty">아직 관심 기업이 없어요. 기업을 열고 ☆를 누르면 여기에 모여요.</li>'
+        : '<li class="empty">조건에 맞는 기업이 없어요.</li>';
       return;
     }
     els.list.innerHTML = items.map((c) => `
@@ -352,7 +411,7 @@
         <button type="button" class="company-item" data-id="${esc(c.id)}" aria-current="${c.id === state.selectedId}">
           ${logoHTML(c)}
           <span class="company-item__body">
-            <span class="company-item__name">${esc(c.name)}${storyCompanyIds().has(c.id) ? '<span class="story-dot" title="오늘의 AI 브리핑에 등장"></span>' : ''}</span>
+            <span class="company-item__name">${favorites.has(c.id) ? '<span class="fav-mark" title="관심 기업">★</span> ' : ''}${esc(c.name)}${storyCompanyIds().has(c.id) ? '<span class="story-dot" title="오늘의 AI 브리핑에 등장"></span>' : ''}</span>
             <span class="company-item__meta">${flag(c.country)} ${esc(c.city)} · ${esc(c.leader.nameKo)}</span>
           </span>
           <span class="company-item__quote">${listQuoteHTML(c)}</span>
@@ -572,6 +631,7 @@
 
     els.detail.className = `detail cat-${c.category}`;
     els.detail.innerHTML = `
+      <button type="button" class="icon-btn detail__fav" data-action="favorite" aria-pressed="${favorites.has(c.id)}" aria-label="${favoriteLabel(c.id)}" title="${favoriteLabel(c.id)}">${STAR_ICON}</button>
       <button type="button" class="icon-btn detail__close" data-action="close" aria-label="닫기">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
@@ -786,6 +846,7 @@
           <span class="story-card__top">
             <span class="story-topic">${esc(s.topic)}</span>
             ${s.importance === 'major' ? '<span class="story-major">주요</span>' : ''}
+            ${s.companyIds.some((id) => favorites.has(id)) ? '<span class="story-fav"><span class="fav-mark" aria-hidden="true">★</span>관심</span>' : ''}
             <span class="story-card__time">${fmtAgo(s.latestAt)}</span>
           </span>
           <span class="story-card__title">${esc(s.title)}</span>
@@ -877,6 +938,7 @@
     cluster.refreshClusters();
     renderList();
     if (state.selectedId && !els.detail.hidden) renderDetail(byId.get(state.selectedId));
+    window.dispatchEvent(new CustomEvent('aimap:briefing'));
   }
 
   // Map overlay (briefing stories, company relations): a few companies are redrawn in their own
@@ -1142,6 +1204,7 @@
     }
     renderList();
     refreshDetailQuotes();
+    window.dispatchEvent(new CustomEvent('aimap:quotes'));
   }
 
   // ───────── Views (map / comparison board) ─────────
@@ -1153,6 +1216,7 @@
     graph: { module: () => window.AIMapRelations, hash: 'relations' },
     models: { module: () => window.AIMapModels, hash: 'models' },
     report: { module: () => window.AIMapReport, hash: 'report' },
+    watchlist: { module: () => window.AIMapWatchlist, hash: 'watchlist' },
   };
 
   function setView(next) {
@@ -1226,6 +1290,23 @@
     relationsOf,
     shortName,
     fmtSince,
+    fmtAgo,
+    fmtChange,
+    sparkline,
+    modelsOf,
+    quoteOf(c) {
+      return c.listings.length ? state.quotes[c.listings[0].symbol] || null : null;
+    },
+    quotesStatus: () => state.quotesStatus,
+    // The current AI briefing's stories about a company.
+    storiesOf: (id) => briefingStories().filter((s) => s.companyIds.includes(id)),
+    favorites: {
+      has: (id) => favorites.has(id),
+      list: () => [...favorites],
+      toggle: toggleFavorite,
+    },
+    openRelations: openRelationsGraph,
+    openModels: openModelTimeline,
   };
 
   // ───────── Events ─────────
@@ -1253,6 +1334,7 @@
     window.AIMapRelations.setQuery(state.query);
     window.AIMapModels.setQuery(state.query);
     window.AIMapReport.setQuery(state.query);
+    window.AIMapWatchlist.setQuery(state.query);
     if (view !== 'map') return;
     if (state.sidebarMode !== 'companies') setSidebarMode('companies'); // results show in the company list
     applyFilters();
@@ -1284,6 +1366,8 @@
     if (!target) return;
     if (target.dataset.action === 'close') {
       closeDetail();
+    } else if (target.dataset.action === 'favorite') {
+      toggleFavorite(state.selectedId);
     } else if (target.dataset.story) {
       selectStory(target.dataset.story);
     } else if (target.dataset.company) {
@@ -1325,6 +1409,12 @@
     if (e.key !== 'Escape') return;
     if (els.app.classList.contains('sidebar-open')) setSidebarOpen(false);
     else if (!els.detail.hidden) closeDetail();
+  });
+
+  window.addEventListener('storage', (e) => {
+    if (e.key !== FAVORITES_KEY) return;
+    favorites = new Set(readFavorites());
+    onFavoritesChanged();
   });
 
   window.addEventListener('hashchange', () => {
