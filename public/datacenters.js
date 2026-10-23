@@ -302,7 +302,8 @@
       case 'partial':
         return `${first ? `${first}에 첫 건물이 가동됐고, ` : '일부 건물이 가동 중이며 '}지금 ${now}${d.maxAt ? `에서 ${fmtMonth(d.maxAt)}까지 ${max}로` : `, 모두 지으면 ${max}로`} 늘어날 전망이에요.`;
       case 'construction':
-        return `아직 가동 전이에요. ${first ? `${fmtMonth(d.firstAt)}에 첫 가동, ` : ''}${d.maxAt ? `${fmtMonth(d.maxAt)}까지 ` : ''}${max} 규모가 될 전망이에요.`;
+        if (d.maxMW == null) return `아직 가동 전이에요. ${first ? `${first}에 첫 가동 예정이고, ` : ''}전력 규모는 공개되지 않았어요.`;
+        return `아직 가동 전이에요. ${first ? `${first}에 첫 가동, ` : ''}${d.maxAt ? `${fmtMonth(d.maxAt)}까지 ` : ''}${max} 규모가 될 전망이에요.`;
       default:
         return `계획만 발표된 단계예요. 알려진 규모는 ${max}예요.`;
     }
@@ -316,10 +317,13 @@
           <p>비영리 연구기관 Epoch AI가 위성 사진으로 건물마다 지붕·냉각 설비·발전기가 갖춰진 시점을 보고, 냉각 설비 규모와 인허가·시공 서류로 전력을 계산했어요. 그래서 지금 전력과 가동 시점은 <b>추정</b>, 앞으로의 규모와 시점은 <b>예상</b>이에요. 아래 근거 자료와 확인 기록에서 계산의 바탕을 볼 수 있어요.</p>
         </div>`;
     }
+    const text = d.maxMW == null
+      ? `회사가 전력 규모를 공개하지 않아서 숫자를 비워 뒀어요. 시점과 설명은 ${d.basis === 'announced' ? '회사 발표' : '언론 보도'}를 따랐어요.`
+      : `${d.basis === 'announced' ? '회사가 공식 발표한 계획 수치예요.' : '언론 보도로 알려진 수치예요. 회사가 공식 확인하지 않은 값이 섞여 있을 수 있어요.'} 현재 실제로 쓰는 전력은 공개되지 않았어요.`;
     return `
       <div class="dc-method">
         <strong>숫자는 어떻게 나왔나요?</strong>
-        <p>${d.basis === 'announced' ? '회사가 공식 발표한 계획 수치예요.' : '언론 보도로 알려진 수치예요. 회사가 공식 확인하지 않은 값이 섞여 있을 수 있어요.'} 현재 실제로 쓰는 전력은 공개되지 않았어요.</p>
+        <p>${text}</p>
       </div>`;
   }
 

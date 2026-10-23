@@ -259,6 +259,14 @@ MANUAL = [
      'sources': [{'title': "Google's ₹1.35 lakh crore AI data centre in Visakhapatnam (Drishti IAS)", 'url': 'https://www.drishtiias.com/state-pcs-current-affairs/googles-1-35-lakh-crore-ai-data-centre-in-visakhapatnam/print_manually', 'note': '2026년 4월 28일 착공, 1GW 규모로 보도'},
                  {'title': 'Google confirms $15bn data center project in Andhra Pradesh, India (DCD)', 'url': 'https://www.datacenterdynamics.com/en/news/google-confirms-15bn-data-center-project-in-andhra-pradesh-india/', 'note': '구글은 150억 달러 투자를 확인했지만 용량은 밝히지 않았다'},
                  {'title': "Inside Google's largest overseas AI infrastructure project (Technology Magazine)", 'url': 'https://technologymagazine.com/news/inside-googles-largest-overseas-ai-infrastructure-project', 'note': '아다니코넥스·에어텔 넥스트라가 건설, 2028년 7월 가동 목표'}]},
+    {'id': 'google-west-memphis', 'name': 'Google West Memphis', 'nameKo': '구글 웨스트멤피스', 'lat': 35.1080, 'lng': -90.2120,
+     'place': 'West Memphis, AR', 'country': 'US', 'owner': 'alphabet', 'ownerName': None, 'users': ['alphabet'], 'userNames': [],
+     'nowMW': 0, 'maxMW': None, 'maxAt': None, 'firstAt': '2027', 'status': 'construction', 'energy': 'Entergy Arkansas',
+     'desc': '구글의 첫 아칸소 데이터센터. 2025년 10월 미시시피강 건너 멤피스 맞은편 약 1,100에이커 부지에서 착공했고, 2027년까지 40억 달러를 들인다. 공사 기간이 18~24개월로 보도돼 2027년 가동이 예상된다. 전력 규모는 공개되지 않았다. 엔터지 아칸소가 전기를 대며, 2026년 10월 구글이 더 많은 전력을 더 빨리 쓰겠다며 2단계 계약(태양광 440MW 구매·배터리·변전소 증설, 약 6억 달러 구글 부담)을 주 공공서비스위원회에 신청했다.',
+     'basis': 'reported', 'certain': True,
+     'sources': [{'title': 'Google is investing in Arkansas with a new data center (Google 블로그, 2025-10-02)', 'url': 'https://blog.google/company-news/inside-google/company-announcements/google-american-innovation-arkansas/', 'note': '첫 아칸소 데이터센터, 2027년까지 40억 달러, 엔터지와 새 600MW 태양광'},
+                 {'title': 'Google hiring for new West Memphis data center (Action News 5, 2026-02-26)', 'url': 'https://www.actionnews5.com/2026/02/26/google-hiring-new-west-memphis-data-center/', 'note': '2025년 10월 착공, 1,100에이커, 공사 18~24개월, 상시 일자리 약 300개'},
+                 {'title': 'Entergy Arkansas, Google expansion to bring additional energy resources (T&D World, 2026-10-20)', 'url': 'https://www.tdworld.com/distributed-energy-resources/news/55413318/entergy-arkansas-google-expansion-to-bring-additional-energy-resources-to-arkansas-grid', 'note': '2단계: 빅아일랜드 태양광 440MW, 배터리 1,400MWh, 갈렛 변전소 증설·230kV 송전선 2개 — 규제 승인 대기'}]},
     {'id': 'mistral-bruyeres-le-chatel', 'name': 'Mistral Compute Bruyères-le-Châtel', 'nameKo': '미스트랄 브뤼에르르샤텔', 'lat': 48.5900, 'lng': 2.1900,
      'place': '프랑스 에손 브뤼에르르샤텔', 'country': 'FR', 'owner': None, 'ownerName': 'Eclairion', 'users': ['mistral'], 'userNames': [],
      'nowMW': None, 'maxMW': 44, 'maxAt': None, 'firstAt': '2026-06', 'status': 'construction', 'chips': 'GB300 13,800개',
@@ -288,7 +296,7 @@ header = """// AI 데이터센터 — 정리 기준: {as_of}. tools/datacenters/
 //
 // 대부분은 Epoch AI의 'AI data centers' 데이터(CC BY 4.0, https://epoch.ai/data/ai-data-centers)를 옮겼다.
 // 위성 사진·인허가·공시로 건물마다 가동 시점과 전력을 추정한 값이며, 미래 값은 Epoch의 예상이다.
-// 한국·일본·인도·프랑스 몇 곳(epoch: false)은 공개 보도로 보탰다. 위치는 Epoch 주소를 OpenStreetMap
+// 한국·일본·인도·프랑스·미국 몇 곳(epoch: false)은 공식 발표·공개 보도로 보탰다. 위치는 Epoch 주소를 OpenStreetMap
 // Nominatim으로 찾은 좌표(주소가 없으면 도시 단위)다. 고칠 내용은 build.py에 적고 다시 만든다.
 //
 // nowMW:   2026년 10월 현재 시설 전체 전력(MW, 냉각 포함). null이면 공개된 값 없음

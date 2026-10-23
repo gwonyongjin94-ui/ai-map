@@ -204,7 +204,7 @@
             <li>마름모 안 그림이 연료예요: ${pinHTML({ fuel: 'nuclear', status: 'operating', certain: true }, 15)} 원자력 ${pinHTML({ fuel: 'advanced', status: 'operating', certain: true }, 15)} 차세대 원자력·핵융합 ${pinHTML({ fuel: 'gas', status: 'operating', certain: true }, 15)} 천연가스</li>
             <li>채움은 상태예요: ${pinHTML({ fuel: 'nuclear', status: 'operating', certain: true }, 15)} 가동 ${pinHTML({ fuel: 'nuclear', status: 'partial', certain: true }, 15)} 일부 가동 ${pinHTML({ fuel: 'nuclear', status: 'construction', certain: true }, 15)} 재가동 준비·건설 중 ${pinHTML({ fuel: 'nuclear', status: 'planned', certain: true }, 15)} 계획</li>
             <li>규모는 회사 <b>발표</b>·공시나 언론 <b>보도</b> 수치예요. 원전 계약은 발전소 전체가 아니라 계약 물량일 수 있어요(상세에 표시).</li>
-            <li>전력 회사와 데이터센터의 연결은 Epoch AI 데이터센터 자료의 전력 공급사 기준이에요.</li>
+            <li>전력 회사와 데이터센터의 연결은 데이터센터 자료(대부분 Epoch AI, 일부 공개 보도)의 전력 공급사 기준이에요.</li>
           </ul>
         </details>
       </div>
@@ -391,7 +391,7 @@
           <section class="section">
             <h3 class="section__title">전력을 공급하는 데이터센터 · ${dcs.length}</h3>
             <div class="dc-companies">${dcs.map((d) => dcChip(d, d.place)).join('')}</div>
-            <p class="dm-more">Epoch AI 데이터센터 자료의 전력 공급사 기준이에요. 각 데이터센터의 근거 자료에서 확인할 수 있어요.</p>
+            <p class="dm-more">${dcs.every((d) => d.epoch) ? 'Epoch AI 데이터센터 자료' : '데이터센터 자료(Epoch AI·공개 보도)'}의 전력 공급사 기준이에요. 각 데이터센터의 근거 자료에서 확인할 수 있어요.</p>
           </section>` : ''}
         <p class="detail__foot">본사 위치에서 선을 이어 보여 줘요 · 정리 기준 ${esc(window.AI_POWER_AS_OF || '')}</p>
       </div>`;
