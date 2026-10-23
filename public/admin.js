@@ -12,12 +12,27 @@
     news: '뉴스 신호',
     relations: '관계 제안 (인수·합병 기사)',
     models: '모델 제안 (출시 기사)',
+    infra: '데이터센터·전력 소식',
     ai: 'Claude 검토',
+    aiInfra: 'Claude 검토 (데이터센터·전력)',
   };
   const SOURCE_LABELS = { wikidata: 'Wikidata', yahoo: 'Yahoo Finance', news: '기사 제목', claude: 'Claude', manual: '직접 수정' };
   const CONFIDENCE_LABELS = { high: '신뢰도 높음', medium: '신뢰도 보통', low: '신뢰도 낮음' };
   const FIELD_LABELS = { leader: '리더', listings: '상장', private: '비상장 정보', parent: '모회사', note: '최근 소식', summary: '소개' };
   const AI_DECISION = { update: '변경 필요', 'no-change': '변경 없음', unclear: '불확실' };
+  const INFRA_CHANGES = {
+    new_site: '새 장소', construction: '건설', operational: '가동', expansion: '증설',
+    power_deal: '전력 계약', cancelled_or_delayed: '취소·지연', other: '기타',
+  };
+  // Where a site chip opens on the map (app.js reads these hashes).
+  const SITE_HASH = { dc: 'dc', plant: 'plant', powerco: 'power' };
+  const SITE_ICON = {
+    dc: '<span class="site-chip__mark site-chip__mark--dc" aria-hidden="true"></span>',
+    plant: '<span class="site-chip__mark site-chip__mark--plant" aria-hidden="true"></span>',
+    powerco: '<span class="site-chip__mark site-chip__mark--powerco" aria-hidden="true"></span>',
+  };
+  const SITE_KIND = { dc: '데이터센터', plant: '발전소', powerco: '전력 회사' };
+  const HQ_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9l6-4v15M10 20V5l10 5v10M4 20h16M13 13h4M13 16h4"/></svg>';
 
   const root = document.getElementById('admin');
   const byId = new Map((window.AI_COMPANIES || []).map((c) => [c.id, c]));
@@ -456,19 +471,64 @@
       </article>`;
   }
 
+  function siteChip(x) {
+    return `<a class="site-chip" href="./#${SITE_HASH[x.type]}/${encodeURIComponent(x.id)}" target="_blank" rel="noopener" title="지도에서 ${SITE_KIND[x.type]} 보기">${SITE_ICON[x.type]}${esc(x.label)}</a>`;
+  }
+
+  // Which places on the map a data center / power headline is about, found by name. A headline
+  // that names no data center or plant may be about a place the map doesn't have yet.
+  function headlineSites(h) {
+    if (!h.sites) return '';
+    const places = h.sites.filter((x) => x.type !== 'powerco');
+    return `<div class="site-chips">${h.sites.map(siteChip).join('')}${places.length ? '' : '<span class="site-chip site-chip--none" title="지도에 아직 없는 곳이거나, 특정 장소 이야기가 아닐 수 있어요">연결된 장소 없음</span>'}</div>`;
+  }
+
   function signalBody(s) {
     if (s.headlines) {
       return `<ul class="news-list">${s.headlines.map((h) => `
         <li><a class="news-item" href="${esc(h.url)}" target="_blank" rel="noopener noreferrer">
           <span class="news-item__title">${esc(h.title)}</span>
           <span class="news-item__meta"><span>${esc(h.source)}</span><span aria-hidden="true">·</span><span>${fmtDate(h.publishedAt)}</span></span>
-        </a></li>`).join('')}</ul>`;
+        </a>${s.kind === 'infra' ? headlineSites(h) : ''}</li>`).join('')}</ul>`;
     }
     if (s.kind === 'rename') return `<p class="watch-card__summary">Yahoo 종목명이 바뀌었어요: <strong>${esc(s.detail.from)}</strong> → <strong>${esc(s.detail.to)}</strong> (${esc(s.detail.symbol)})</p>`;
     return `<p class="watch-card__summary">${esc(s.detail.symbol)} 시세를 ${s.detail.count}번 연속 불러오지 못했어요 (${esc(s.detail.error)}). 상장 폐지나 심볼 변경일 수 있어요.</p>`;
   }
 
+  // Claude's read of data center / power news: what each story is and whether the map has it.
+  function infraNotesHTML(s) {
+    if (!s.infraNotes || !s.infraNotes.length) return '';
+    return `<ul class="infra-notes">${s.infraNotes.map((n) => `
+      <li class="infra-note${n.differs ? ' is-new' : ''}">
+        <span class="pill-row">
+          <span class="tag ${n.differs ? 'tag--kind' : ''}">${n.differs ? '지도와 다름' : '이미 반영됨'}</span>
+          <span class="tag">${INFRA_CHANGES[n.change] || esc(n.change)}</span>
+          ${n.siteId ? siteChip({ type: n.siteType, id: n.siteId, label: n.label }) : n.differs || n.change === 'new_site' ? '<span class="site-chip site-chip--none">지도에 없는 곳</span>' : ''}
+        </span>
+        <p>${esc(n.note)}</p>
+      </li>`).join('')}</ul>`;
+  }
+
+  function infraSignalHTML(s) {
+    const head = s.powerCompanyId
+      ? `<div class="watch-card__company"><span class="pw-co__icon" aria-hidden="true">${HQ_ICON}</span><span><strong>${esc(s.subject)}</strong> <span class="muted">전력 회사</span></span></div>`
+      : companyHead(record(s.companyId));
+    const ai = s.ai ? `<p class="ai-verdict ai-verdict--${esc(s.ai.decision)}"><strong>Claude:</strong> ${esc(s.ai.reason)}</p>` : '';
+    return `
+      <article class="card watch-card" data-signal="${esc(s.id)}">
+        <header class="watch-card__head">
+          ${head}
+          <span class="pill-row"><span class="tag tag--kind">${esc(s.label)}</span><span class="tag">기사 ${s.headlines.length}건</span></span>
+        </header>
+        ${ai}
+        ${infraNotesHTML(s)}
+        ${signalBody(s)}
+        <div class="watch-card__actions"><button type="button" class="btn" data-action="dismiss-signal">확인했어요</button></div>
+      </article>`;
+  }
+
   function signalHTML(s) {
+    if (s.kind === 'infra') return infraSignalHTML(s);
     const c = record(s.companyId);
     const editKeys = ['leader', 'note', ...(c.listings && c.listings.length ? [] : ['private']), 'parent'];
     const ai = s.ai ? `<p class="ai-verdict ai-verdict--${esc(s.ai.decision)}"><strong>Claude: ${AI_DECISION[s.ai.decision] || esc(s.ai.decision)}</strong> ${esc(s.ai.reason)}</p>` : '';
@@ -537,7 +597,10 @@
         ? data.proposals.map((p) => (p.kind === 'relation' ? relationProposalHTML(p) : p.kind === 'model' ? modelProposalHTML(p) : proposalHTML(p))).join('')
         : `<p class="watch-empty">지금은 반영할 제안이 없어요.${data.signals.length ? ' 살펴볼 신호 탭도 확인해 보세요.' : ''}</p>`;
     } else if (tab === 'signals') {
-      list = data.signals.length ? data.signals.map(signalHTML).join('') : '<p class="watch-empty">새 신호가 없어요.</p>';
+      const infraNote = data.signals.some((x) => x.kind === 'infra')
+        ? `<p class="watch-hint watch-hint--box">데이터센터·전력 소식은 알려 주기만 해요. 데이터센터는 Epoch AI 자료로 만들고(tools/datacenters/build.py) 발전소는 손으로 확인해 넣기 때문에(public/data/power.js), 지도와 다른 소식은 기사 출처를 확인한 뒤 그 파일에 반영해 주세요. 장소 칩을 누르면 지도에서 열려요.</p>`
+        : '';
+      list = data.signals.length ? infraNote + data.signals.map(signalHTML).join('') : '<p class="watch-empty">새 신호가 없어요.</p>';
     } else {
       list = data.overrides.length || (data.addedRelations || []).length || (data.addedModels || []).length
         ? addedModelsHTML() + addedRelationsHTML() + data.overrides.map(historyHTML).join('')

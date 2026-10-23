@@ -2082,6 +2082,22 @@ body.admin-page {
 
 .ai-verdict { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); font-size: 13px; line-height: 1.5; }
 .ai-verdict--update { background: var(--accent-soft); }
+.watch-hint--box { margin: 0; padding: 10px 12px; border: 1px dashed var(--border); border-radius: 10px; line-height: 1.55; }
+
+/* Data center / power headlines: the places on the map each one is about */
+.site-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; }
+.site-chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); font-size: 12px; text-decoration: none; }
+a.site-chip:hover { background: var(--surface-2); }
+a.site-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.site-chip--none { border-style: dashed; color: var(--text-3); }
+.site-chip__mark { width: 9px; height: 9px; flex-shrink: 0; }
+.site-chip__mark--dc { border-radius: 2px; background: var(--dc); }
+.site-chip__mark--plant { width: 8px; height: 8px; transform: rotate(45deg); background: var(--power); }
+.site-chip__mark--powerco { border-radius: 2px; border: 1.5px solid var(--power); }
+.infra-notes { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.infra-note { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; }
+.infra-note.is-new { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.infra-note p { margin: 6px 0 0; font-size: 13px; line-height: 1.55; }
 
 .history { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; font-size: 13px; }
 .history li { padding-top: 10px; border-top: 1px solid var(--border); }

@@ -1458,10 +1458,26 @@
     onFavoritesChanged();
   });
 
+  // Places on the map that other pages link to (the data watch's data center / power news):
+  // #dc/<id>, #plant/<id>, #power/<id>.
+  function openPlaceFromHash(id) {
+    const [kind, placeId] = id.split('/');
+    const open = {
+      dc: () => window.AIMapDatacenters.open(placeId, { fly: true }),
+      plant: () => window.AIMapPower.openPlant(placeId, { fly: true }),
+      power: () => window.AIMapPower.openCompany(placeId),
+    }[kind];
+    if (!open || !placeId) return false;
+    setView('map');
+    open();
+    return true;
+  }
+
   window.addEventListener('hashchange', () => {
     const id = decodeURIComponent(location.hash.slice(1));
     const page = Object.keys(PAGE_VIEWS).find((name) => PAGE_VIEWS[name].hash === id);
     if (page) setView(page);
+    else if (openPlaceFromHash(id)) return;
     else if (byId.has(id)) {
       setView('map');
       if (id !== state.selectedId) select(id);
@@ -1513,7 +1529,9 @@
   const initialId = decodeURIComponent(location.hash.slice(1));
   const initialPage = Object.keys(PAGE_VIEWS).find((name) => PAGE_VIEWS[name].hash === initialId);
   if (initialPage) setView(initialPage);
-  else if (byId.has(initialId)) select(initialId);
+  else if (openPlaceFromHash(initialId)) {
+    // opened above
+  } else if (byId.has(initialId)) select(initialId);
 
   loadQuotes();
   loadBriefing();
