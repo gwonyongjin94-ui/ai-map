@@ -1,5 +1,7 @@
 :root {
   --star: #e8a400; /* favorites */
+  --power: #b8326f; /* power plants: one hue, fuel shown by glyph and status by fill style */
+  --power-ink: #ffffff;
   --dc: #3f4b5e; /* data center pins: one neutral ink, status shown by fill style */
   --dc-ink: #ffffff;
   --bg: #f4f5f8;
@@ -56,6 +58,8 @@
 
 :root[data-theme='dark'] {
   --star: #f2bd3a;
+  --power: #e57aa8;
+  --power-ink: #1a0f15;
   --dc: #b9c4d4;
   --dc-ink: #10141b;
   --bg: #0d1015;
@@ -1045,8 +1049,11 @@ a.news-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 }
 
 .segmented--full { display: flex; }
+/* Tabs share the width by their label length, so a long one ("데이터센터") doesn't wrap. */
 .segmented--full button {
-  flex: 1;
+  flex: 1 1 auto;
+  padding: 0 8px;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2588,6 +2595,78 @@ body.admin-page {
 .dc-mini__name { font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dc-mini__meta { font-size: 12px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dc-mini__mw { font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ───────── Power plants & power companies ───────── */
+/* Diamond pins (rotated squares), unlike round companies and square data centers. */
+.pw-pin {
+  --size: 24px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: calc(var(--size) * 0.78);
+  height: calc(var(--size) * 0.78);
+  margin: calc(var(--size) * 0.11);
+  border-radius: calc(var(--size) * 0.14);
+  background: var(--power);
+  color: var(--power-ink);
+  transform: rotate(45deg);
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.3);
+  flex-shrink: 0;
+}
+
+.pw-pin__glyph { display: grid; place-items: center; width: 74%; height: 74%; transform: rotate(-45deg); }
+.pw-pin svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
+.pw-pin svg .fill { fill: currentColor; stroke: none; }
+.pw-partial { outline: 2px dashed var(--power); outline-offset: 2px; }
+.pw-restarting, .pw-construction {
+  background: repeating-linear-gradient(90deg, var(--power) 0 3px, color-mix(in srgb, var(--power) 35%, var(--surface)) 3px 6px);
+}
+.pw-planned { background: var(--surface); color: var(--power); border: 2px dashed var(--power); box-shadow: none; }
+.pw-pin.is-uncertain { opacity: 0.45; }
+.leaflet-marker-icon .pw-pin { cursor: pointer; transition: transform 0.15s; }
+.leaflet-marker-icon .pw-pin:hover { transform: rotate(45deg) scale(1.12); }
+.pw-pin.is-selected { box-shadow: 0 0 0 4px color-mix(in srgb, var(--power) 35%, transparent), 0 4px 14px rgba(16, 24, 40, 0.35); }
+.detail--power .detail__head .pw-pin { --size: 52px; }
+.dc-chip .pw-pin { --size: 15px; }
+.dc-legend .pw-pin { --size: 15px; display: inline-grid; vertical-align: middle; }
+
+.pw-toggle svg { fill: none; }
+.pw-toggle[aria-pressed='true'] { background: var(--power); border-color: var(--power); color: var(--power-ink); }
+
+.pw-link-line { fill: none; stroke: var(--power); stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; }
+.pw-link-line--buyer { stroke-dasharray: 6 5; }
+.pw-link-line--dc { stroke: var(--dc); }
+
+#powerPane { display: flex; flex-direction: column; min-height: 0; }
+#powerPane[hidden] { display: none; }
+.pw-scroll { flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 6px; }
+.pw-scroll .dc-list { overflow: visible; flex: none; }
+.pw-section { margin: 0; padding: 12px 16px 2px; font-size: 12px; font-weight: 700; color: var(--text-3); letter-spacing: 0.02em; }
+
+.pw-co { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 2px 10px; width: 100%; padding: 9px 8px; border: 0; border-radius: 10px; background: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+.pw-co:hover { background: var(--surface-2); }
+.pw-co[aria-current='true'] { background: var(--accent-soft); }
+.pw-co__counts { grid-column: 2; font-size: 11.5px; color: var(--text-3); }
+.pw-co__icon { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--surface-2); color: var(--text-2); flex-shrink: 0; }
+.pw-co__icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
+.pw-co__icon--big { width: 52px; height: 52px; border-radius: 14px; }
+.pw-co__icon--big svg { width: 28px; height: 28px; }
+.pw-co__icon--pin { width: 34px; height: 34px; border-radius: 9px; background: var(--surface); color: var(--text); box-shadow: 0 0 0 2px var(--power), 0 2px 8px rgba(16, 24, 40, 0.3); }
+
+.pw-fuel-pill { background: color-mix(in srgb, var(--power) 14%, transparent); color: var(--text); }
+.pw-link { padding: 0; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 650; cursor: pointer; text-align: left; }
+.pw-link:hover { text-decoration: underline; }
+.pw-deal { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); font-size: 13px; line-height: 1.55; }
+.pw-deal strong { margin-right: 6px; }
+.pw-deals { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.pw-deals li { display: grid; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.pw-deals li:last-child { border-bottom: 0; }
+.pw-deals p { margin: 0; line-height: 1.55; color: var(--text-2); }
+.pw-deals a { font-size: 12px; color: var(--accent); text-decoration: none; }
+.pw-deals a:hover { text-decoration: underline; }
+.pw-cos { margin-top: 8px; }
+.pw-co-tag { cursor: pointer; font: inherit; font-size: 12.5px; }
+.pw-co-tag:hover { background: var(--surface-2); }
 
 /* ───────── Mobile ───────── */
 @media (max-width: 820px) {

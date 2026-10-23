@@ -380,10 +380,12 @@
             ${fact(firstLabel, firstValue)}
             ${d.h100e ? fact('컴퓨팅 (H100 환산)', `<span class="dc-num is-est" title="지금 들어 있는 칩의 성능을 엔비디아 H100 개수로 바꾼 값 (추정)">약 ${d.h100e >= 10000 ? `${Math.round(d.h100e / 10000)}만` : d.h100e.toLocaleString('ko-KR')}개<span class="dc-basis dc-basis--est">추정</span></span>`) : ''}
             ${d.chips ? fact('칩', esc(d.chips)) : ''}
-            ${d.energy ? fact('전력 공급', esc(d.energy)) : ''}
+            ${d.energy && !window.AIMapPower ? fact('전력 공급', esc(d.energy)) : ''}
           </div>
           ${methodHTML(d)}
         </section>
+
+        ${window.AIMapPower ? window.AIMapPower.dcSectionHTML(d) : ''}
 
         ${d.desc ? `<section class="section"><h3 class="section__title">설명</h3><p class="detail__summary">${esc(d.desc)}</p></section>` : ''}
 
@@ -427,6 +429,7 @@
     const d = byId.get(id);
     if (!d) return;
     if (!state.visible) setVisible(true);
+    if (window.AIMapPower) window.AIMapPower.deselect();
     // Opening a site that the confirmed view hides (e.g. from a company's detail) widens the view.
     if (!d.certain && state.scope === 'certain') state.scope = 'all';
     ctx.showPanel(detailHTML(d), 'detail--dc');
@@ -493,5 +496,9 @@
     open,
     deselect,
     sectionHTML,
+    // For the power layer: data center lookups and the same pin.
+    get: (id) => byId.get(id),
+    pinHTML,
+    label,
   };
 })();

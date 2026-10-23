@@ -43,7 +43,7 @@
     newsLang: storageGet(NEWS_LANG_KEY) === 'en' ? 'en' : 'ko',
     quotes: {},
     quotesStatus: 'idle', // idle | loading | ok | unavailable
-    sidebarMode: ['briefing', 'datacenters'].includes(storageGet(SIDEBAR_MODE_KEY)) ? storageGet(SIDEBAR_MODE_KEY) : 'companies',
+    sidebarMode: ['briefing', 'datacenters', 'power'].includes(storageGet(SIDEBAR_MODE_KEY)) ? storageGet(SIDEBAR_MODE_KEY) : 'companies',
     briefing: null, // last /api/briefing response
     selectedStoryId: null,
   };
@@ -65,6 +65,7 @@
     companyPane: document.getElementById('companyPane'),
     briefingPane: document.getElementById('briefingPane'),
     dcPane: document.getElementById('dcPane'),
+    powerPane: document.getElementById('powerPane'),
     briefingBadge: document.getElementById('briefingBadge'),
   };
 
@@ -683,6 +684,7 @@
           </section>
 
           ${window.AIMapDatacenters.sectionHTML(c.id)}
+          ${window.AIMapPower.companySectionHTML(c.id)}
 
           <section class="section">
             <h3 class="section__title">${stockTitle}</h3>
@@ -953,7 +955,8 @@
   let overlayPoints = null; // [{ c, latlng (true position), marker, line }], main first
 
   // others: [{ c, linkClass }]
-  // `mainHTML` draws the main point when it isn't a company (a data center).
+  // `mainHTML` draws the main point when it isn't a company (a data center, a power plant); an
+  // entry of `others` may do the same with `html` (+ `onClick`).
   function showOverlay(kind, main, others, { mainHTML = null } = {}) {
     storyLayer.clearLayers();
     overlayKind = kind;
@@ -970,7 +973,7 @@
     }
     for (const p of points) {
       const { c } = p;
-      const custom = c === main && mainHTML;
+      const custom = c === main ? mainHTML : p.html;
       p.marker = L.marker(p.latlng, {
         pane: 'storyPane',
         title: c.name,
@@ -978,13 +981,14 @@
         icon: L.divIcon({
           className: 'pin-icon',
           html: custom
-            ? `<div class="story-pin">${mainHTML}<span class="story-pin__label">${esc(c.label || c.name)}</span></div>`
+            ? `<div class="story-pin">${custom}<span class="story-pin__label">${esc(c.label || c.name)}</span></div>`
             : `<div class="story-pin"><div class="pin cat-${c.category}${c === main ? ' is-selected' : ''}">${logoHTML(c)}</div><span class="story-pin__label">${esc(c.name)}</span></div>`,
           iconSize: [40, 40],
           iconAnchor: [20, 20],
         }),
       });
       if (!custom) p.marker.on('click', () => select(c.id));
+      else if (p.onClick) p.marker.on('click', p.onClick);
       p.marker.addTo(storyLayer);
     }
     overlayPoints = points;
@@ -1129,9 +1133,11 @@
     els.companyPane.hidden = mode !== 'companies';
     els.briefingPane.hidden = mode !== 'briefing';
     els.dcPane.hidden = mode !== 'datacenters';
-    // Company pins step back while the data center list is open.
-    map.getContainer().classList.toggle('is-dc-mode', mode === 'datacenters');
+    els.powerPane.hidden = mode !== 'power';
+    // Company pins step back while the data center or power list is open.
+    map.getContainer().classList.toggle('is-dc-mode', mode === 'datacenters' || mode === 'power');
     if (mode === 'datacenters') window.AIMapDatacenters.setVisible(true);
+    if (mode === 'power') window.AIMapPower.setVisible(true);
     for (const btn of els.sidebarModes.querySelectorAll('[data-mode]')) {
       btn.setAttribute('aria-pressed', String(btn.dataset.mode === mode));
     }
@@ -1151,8 +1157,9 @@
     const c = byId.get(id);
     if (!c) return;
     clearStory();
-    if (overlayKind === 'relations' || overlayKind === 'datacenter') clearOverlay();
+    if (['relations', 'datacenter', 'power'].includes(overlayKind)) clearOverlay();
     window.AIMapDatacenters.deselect();
+    window.AIMapPower.deselect();
     const prev = state.selectedId;
     state.selectedId = id;
 
@@ -1182,6 +1189,7 @@
     clearStory();
     clearOverlay();
     window.AIMapDatacenters.deselect();
+    window.AIMapPower.deselect();
     setHash(null);
   }
 
@@ -1360,6 +1368,7 @@
     window.AIMapReport.setQuery(state.query);
     window.AIMapWatchlist.setQuery(state.query);
     window.AIMapDatacenters.setQuery(state.query);
+    window.AIMapPower.setQuery(state.query);
     if (view !== 'map') return;
     // Results show in the company list — or the data center list when that's open.
     if (state.sidebarMode === 'briefing') setSidebarMode('companies');
@@ -1388,12 +1397,16 @@
   });
 
   els.detail.addEventListener('click', (e) => {
-    const target = e.target.closest('[data-action], [data-tab], [data-news-lang], [data-story], [data-company], [data-dc]');
+    const target = e.target.closest('[data-action], [data-tab], [data-news-lang], [data-story], [data-company], [data-dc], [data-plant], [data-power-co]');
     if (!target) return;
     if (target.dataset.action === 'close') {
       closeDetail();
     } else if (target.dataset.dc) {
       window.AIMapDatacenters.open(target.dataset.dc);
+    } else if (target.dataset.plant) {
+      window.AIMapPower.openPlant(target.dataset.plant);
+    } else if (target.dataset.powerCo) {
+      window.AIMapPower.openCompany(target.dataset.powerCo);
     } else if (target.dataset.action === 'favorite') {
       toggleFavorite(state.selectedId);
     } else if (target.dataset.story) {
@@ -1479,6 +1492,19 @@
     overlayKind: () => overlayKind,
     isMobile: () => MOBILE_QUERY.matches,
     detailWidth: () => els.detail.offsetWidth,
+  });
+  window.AIMapPower.init({
+    map,
+    pane: els.powerPane,
+    esc,
+    logoHTML,
+    flag,
+    byId,
+    shortName,
+    showPanel,
+    showOverlay,
+    clearOverlay,
+    overlayKind: () => overlayKind,
   });
   setSidebarMode(state.sidebarMode);
   renderBriefingPane();
