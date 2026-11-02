@@ -1247,6 +1247,7 @@
     board: { module: () => window.AIMapBoard, hash: 'board' },
     graph: { module: () => window.AIMapRelations, hash: 'relations' },
     models: { module: () => window.AIMapModels, hash: 'models' },
+    bench: { module: () => window.AIMapBench, hash: 'bench' },
     report: { module: () => window.AIMapReport, hash: 'report' },
     watchlist: { module: () => window.AIMapWatchlist, hash: 'watchlist' },
   };
@@ -1256,8 +1257,9 @@
     view = next;
     els.app.classList.toggle('is-page-view', view !== 'map');
     els.app.classList.toggle('is-board', view === 'board');
+    const tab = view === 'bench' ? 'models' : view; // performance comparison is a sub-tab of 모델
     for (const btn of els.viewSwitch.querySelectorAll('[data-view]')) {
-      btn.setAttribute('aria-pressed', String(btn.dataset.view === view));
+      btn.setAttribute('aria-pressed', String(btn.dataset.view === tab));
     }
     setSidebarOpen(false);
     for (const [name, v] of Object.entries(PAGE_VIEWS)) {
@@ -1365,6 +1367,7 @@
     window.AIMapBoard.setQuery(state.query);
     window.AIMapRelations.setQuery(state.query);
     window.AIMapModels.setQuery(state.query);
+    window.AIMapBench.setQuery(state.query);
     window.AIMapReport.setQuery(state.query);
     window.AIMapWatchlist.setQuery(state.query);
     window.AIMapDatacenters.setQuery(state.query);

@@ -87,6 +87,7 @@
     els.root.innerHTML = `
       <div class="board__inner">
         <header class="board__header">
+          <nav class="sub-tabs" aria-label="모델 화면"><a href="#models" aria-current="page">출시 타임라인</a><a href="#bench">성능 비교</a></nav>
           <h1 class="board__title">AI 모델 타임라인</h1>
           <p class="board__sub">2022년 11월 ChatGPT부터 지도에 있는 기업이 낸 주요 모델 ${models.length}개 · ${esc(window.AI_MODELS_AS_OF || '')} 기준 공개 보도 정리</p>
         </header>

@@ -5,3 +5,5 @@ node_modules/
 /data/
 # downloaded by tools/datacenters/build.py
 /tools/datacenters/epoch/
+# downloaded by tools/benchmarks/build.py
+/tools/benchmarks/epoch/
