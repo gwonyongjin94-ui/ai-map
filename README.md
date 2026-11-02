@@ -25,6 +25,15 @@ npm start
 
 http://localhost:5173 에서 열린다. Node 20.12 이상이 필요하다. (`PORT` 환경변수로 포트 변경)
 
+### 맥 켤 때 자동 실행
+
+이 맥에서는 launchd(`~/Library/LaunchAgents/com.aimap.server.plist`)가 로그인할 때 서버를 켜고, 서버가 꺼지면 30초 안에 다시 켠다. 맥이 잠자는 동안에는 멈췄다가 깨어나면 이어서 돈다. 로그는 `~/Library/Logs/ai-map.log`. 이 서버가 돌고 있으면 `npm start`는 포트가 겹치니 하지 않는다.
+
+- 화면 파일(`public/`)과 데이터 파일은 새로고침만 하면 바뀐다. 서버 코드(`server.js`, `lib/`)를 고쳤으면 다시 시작한다: `launchctl kickstart -k gui/$(id -u)/com.aimap.server`
+- 잠깐 멈추기(다음 로그인 때 다시 켜짐): `launchctl bootout gui/$(id -u)/com.aimap.server`
+- 다시 켜기: `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.aimap.server.plist`
+- 자동 실행을 아예 없애기: 멈춘 뒤 위 plist 파일을 지운다.
+
 ### AI 브리핑 켜기
 
 프로젝트 폴더에 `.env` 파일을 만들고 Anthropic API 키를 적는다. 서버 재시작 없이 다음 요청부터 적용된다.

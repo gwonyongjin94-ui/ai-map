@@ -3,14 +3,18 @@
   "configurations": [
     {
       "name": "ai-map",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["server.js"],
+      "url": "http://localhost:5173",
       "port": 5173
     },
     {
       "name": "ai-map-sample",
       "runtimeExecutable": "env",
-      "runtimeArgs": ["PORT=5174", "BRIEFING_FIXTURE=test/fixtures/briefing-sample.json", "node", "server.js"],
+      "runtimeArgs": [
+        "PORT=5174",
+        "BRIEFING_FIXTURE=test/fixtures/briefing-sample.json",
+        "node",
+        "server.js"
+      ],
       "port": 5174
     }
   ]
